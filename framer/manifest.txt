@@ -1,0 +1,103 @@
+app.coffee
+fonts/GothaBol
+fonts/GothaBoo
+framer/backups/backup-2017-04-19 15.00.46.coffee
+framer/backups/backup-2017-04-19 15.02.46.coffee
+framer/backups/backup-2017-04-19 15.03.46.coffee
+framer/backups/backup-2017-04-19 15.05.46.coffee
+framer/backups/backup-2017-04-19 15.06.46.coffee
+framer/backups/backup-2017-04-19 15.07.46.coffee
+framer/backups/backup-2017-04-19 15.08.46.coffee
+framer/backups/backup-2017-04-19 15.09.46.coffee
+framer/backups/backup-2017-04-19 15.10.46.coffee
+framer/backups/backup-2017-04-19 15.12.46.coffee
+framer/backups/backup-2017-04-19 15.13.46.coffee
+framer/backups/backup-2017-04-19 15.14.47.coffee
+framer/backups/backup-2017-04-19 15.16.46.coffee
+framer/backups/backup-2017-04-19 15.26.49.coffee
+framer/backups/backup-2017-04-19 15.31.49.coffee
+framer/backups/backup-2017-04-19 15.32.49.coffee
+framer/backups/backup-2017-04-19 15.33.49.coffee
+framer/backups/backup-2017-04-19 15.43.49.coffee
+framer/backups/backup-2017-04-19 15.52.49.coffee
+framer/backups/backup-2017-04-19 15.57.49.coffee
+framer/backups/backup-2017-04-19 15.58.49.coffee
+framer/coffee-script.js
+framer/config.json
+framer/framer.generated.js
+framer/framer.init.js
+framer/framer.js
+framer/framer.js.map
+framer/framer.modules.js
+framer/images/cursor-active.png
+framer/images/cursor-active@2x.png
+framer/images/cursor.png
+framer/images/cursor@2x.png
+framer/images/icon-120.png
+framer/images/icon-152.png
+framer/images/icon-180.png
+framer/images/icon-192.png
+framer/images/icon-76.png
+framer/manifest.txt
+framer/preview.png
+framer/style.css
+framer/version
+images/AdvocatePreview.png
+images/attract-01.png
+images/attract-02.png
+images/attract1_CTA.png
+images/attract2_CTA.png
+images/checked.png
+images/cursor.png
+images/email_prompt.png
+images/emailContainer.png
+images/home_imgs.png
+images/home_overlayquarter.png
+images/home_text.png
+images/keyboard.png
+images/navAdvocate.png
+images/NavAware.png
+images/navBar.png
+images/navGive.png
+images/navPart.png
+images/onboarding.png
+images/overlay.png
+images/petition.png
+images/progress1.png
+images/progress2.png
+images/progress2_A.png
+images/progress3.png
+images/progress3_A.png
+images/progrss1_A.png
+images/quiz1.png
+images/quiz1p.png
+images/quiz2.png
+images/quiz2p.png
+images/quiz3.png
+images/quiz3p.png
+images/quiz4.png
+images/quiz4p.png
+images/quiz5.png
+images/quiz5p.png
+images/quiz6.png
+images/quiz6p.png
+images/quiz7.png
+images/quiz7p.png
+images/quiz8.png
+images/quiz8p.png
+images/quiz9.png
+images/quiz9p.png
+images/quiz_CTA .png
+images/quiz_next.png
+images/quiz_skip.png
+images/quizRes_Advocate.png
+images/send.png
+images/sendEmail.png
+images/tool1_unchecked.png
+images/toolkit_1.png
+images/toolkit_blank.png
+images/toolkit_overlay.png
+images/toolkit_success.png
+index.html
+modules/FlowComponentCycle.coffee
+modules/myModule.coffee
