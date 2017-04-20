@@ -1,5 +1,4 @@
 require('FlowComponentCycle')
-require('myModule')
 
 # Define and set custom device
 Framer.Device.customize
@@ -64,6 +63,7 @@ quiz1p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz1p.png"
+	name: 'awareness'
 
 quiz2 = new Layer
 	width: 499
@@ -74,6 +74,7 @@ quiz2p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz2p.png"
+	name: 'awareness'
 
 quiz3 = new Layer
 	width: 499
@@ -84,6 +85,7 @@ quiz3p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz3p.png"
+	name: 'advocate'
 
 quiz4 = new Layer
 	width: 499
@@ -94,6 +96,7 @@ quiz4p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz4p.png"
+	name: 'awareness'
 
 quiz5 = new Layer
 	width: 499
@@ -104,6 +107,7 @@ quiz5p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz5p.png"
+	name: 'awareness'
 
 quiz6 = new Layer
 	width: 499
@@ -114,6 +118,7 @@ quiz6p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz6p.png"
+	name: 'advocate'
 
 quiz7 = new Layer
 	width: 499
@@ -124,6 +129,7 @@ quiz7p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz7p.png"
+	name: 'advocate'
 
 quiz8 = new Layer
 	width: 499
@@ -134,6 +140,7 @@ quiz8p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz8p.png"
+	name: 'advocate'
 
 quiz9 = new Layer
 	width: 499
@@ -144,6 +151,7 @@ quiz9p = new Layer
 	width: 499
 	height: 265
 	image: "images/quiz9p.png"
+	name: 'advocate'
 
 quizArray = [quiz1, quiz2, quiz3, quiz4, quiz5, quiz6, quiz7, quiz8, quiz9]
 quizArrayP = [quiz1p, quiz2p, quiz3p, quiz4p, quiz5p, quiz6p, quiz7p, quiz8p, quiz9p]
@@ -190,10 +198,24 @@ exploreAdvocate = new Layer
 	opacity: 0
 
 exploreOther = new Layer
-	parent: quizRes_Advocate
 	y: 268
 	x: 30
 	width: 524
+	height: 77
+	opacity: 0
+
+quizRes_Awareness = new Layer
+	height: 407
+	image: "images/quizRes_Awareness.png"
+	width: 1488
+	y: 1080
+	x: Align.center
+
+exploreAwareness = new Layer
+	parent: quizRes_Awareness
+	x: 937
+	y: 192
+	width: 467
 	height: 77
 	opacity: 0
 
@@ -250,6 +272,7 @@ advocatePreview = new Layer
 	width: Screen.width
 	height: Screen.height
 	image: "images/AdvocatePreview.png"
+	name: 'advocate'
 
 petitionBtn = new Layer
 	opacity: 0
@@ -271,8 +294,16 @@ petition = new Layer
 	width: Screen.width
 	height: Screen.height
 	image: "images/petition.png"
-	name: 'petition'
-	
+	name: 'advocate'
+
+#AWARENESS PREVIEW PAGE
+
+awarenessPreview = new Layer
+	height: Screen.height
+	image: "images/awarenessPreview.png"
+	width: Screen.width
+	name: 'awareness'
+
 #NAV
 
 navBar = new Layer
@@ -506,7 +537,8 @@ for button in quizArray
 
 for button in quizArrayP
 	button.parent = quizContainer
-	
+
+#positioning quiz elements (inactive)
 quizArray.forEach (q, index) ->
 	if index >= 0 && index < 3
 		q.y = 150
@@ -523,9 +555,10 @@ quizArray.forEach (q, index) ->
 	else
 		q.x = 1220
 
+#positioning quiz elements (active)
 quizArrayP.forEach (q, index) ->
 	q.visible = false
-	q.name = "inactive"
+	q.html = "inactive"
 	
 	if index >= 0 && index < 3
 		q.y = 150
@@ -542,7 +575,9 @@ quizArrayP.forEach (q, index) ->
 	else
 		q.x = 1220
 
-progress = 1
+#check progress for what step the user is on
+progress = 1 #set as 1 to start
+#change state of progress bar
 progressCheck = ( _p )->
 	if _p == 1
 		progress2.stateSwitch('inactive')
@@ -556,15 +591,15 @@ progressCheck = ( _p )->
 		progress2.stateSwitch('inactive')
 		progress1.stateSwitch('inactive')
 		progress3.stateSwitch('active')
-	
 
+#adding and positioning progress bar to page
 attachProgress = ( _progress )->
 	progressCheck(_progress)
 	progressArray.forEach (p, index) ->
 		currentLayer.addChild(p)
 		p.y = 100 * (index + 1) + 250
 
-#TAP GOT IT
+#ONBOARDING -> click to say GOT IT, brings up quiz
 removeOnboarding = ->
 	onboarding.visible = false
 	flow.showOverlayCenter(quizContainer)
@@ -573,60 +608,88 @@ removeOnboarding = ->
 onboarding.onClick(removeOnboarding)
 overlay.onClick(removeOnboarding)
 
+counter = 0
+nAware = 0
+nAdvocate = 0
+winner = ''
+
 #function to check counter
 checkCounter = ->
+	counter = 0
+	nAware = 0
+	nAdvocate = 0
+	winner = ''
 	for a in quizArrayP
-		if a.name == "active"
+		if a.html == " "
 			counter++
+			if a.name == 'awareness'
+				nAware++
+			if a.name == 'advocate'
+				nAdvocate++
+	if nAdvocate > nAware
+		winner = quizRes_Advocate
+# 		print winner
+	if nAware > nAdvocate
+		winner = quizRes_Awareness
+# 		print winner
 
 #limits only 3 choices & shows active buttons
-counter = 0
 for q in quizArray
 	q.onClick ->
 		match = this.id + 1
-		counter = 0
 		checkCounter()
 		if counter >= 0
 			quiz_next.opacity = 1
+			quiz_next.ignoreEvents = true
 			quiz_next.onClick ->
-				deliverResults()
-# 		print counter
+				checkCounter()
+				deliverResults(winner)
 		if counter < 3
 			for activeBtns in quizArrayP
 				if match == activeBtns.id
 					activeBtns.visible = true
-					activeBtns.name = "active"
+					activeBtns.html = " "
 					activeBtns.onClick ->
 						this.visible = false
-						this.name = "inactive"
-						if counter <= 0
+						this.html = "inactive"
+						checkCounter()
+						if counter == 0
+							quiz_next.ignoreEvents = true
 							quiz_next.opacity = 0.2
-						counter = 0
 						checkCounter()
 
 #function for slide up to delivering quiz results
-deliverResults = Utils.debounce 0.1, ->
+deliverResults = Utils.debounce 0.1, (winner) ->
+	print winner
 	quiz_skip.visible = false
 	quiz_next.visible = false
 	quiz_CTA.visible = false
+	quizContainer.addChild(winner)
 	for buttons in quizArray
 		animateQuizBtns(buttons)
 	for buttons in quizArrayP
 		animateQuizBtns(buttons)
-	quizRes_Advocate.animate
-		y: (quizRes_Advocate.y - quizRes_Advocate.height)
+	winner.addChild(exploreOther)
+	if winner == quizRes_Advocate
+		winner.addChild(exploreAdvocate)
+	else if winner == quizRes_Awareness
+		winner.addChild(exploreAwareness)
+	winner.animate
+		y: (winner.y - winner.height)
 
 animateQuizBtns = (_buttons) ->
 	_buttons.animate
 		blur: 5
 		y: (_buttons.y - 330)
 		opacity: 0.12
+	_buttons.ignoreEvents = true
 
+#skip to HOME
 quiz_skip.onClick ->
 	flow.showOverlayCenter(home_imgs)
 	currentLayer = home_imgs
 
-#Home animations
+#HOME animations
 for o in homeOArray
 	o.onMouseOver ->
 		this.animate
@@ -635,11 +698,13 @@ for o in homeOArray
 		this.animate
 			opacity: 1
 
+#Select ADVOCATE PREVIEW from HOME
 home_overlay1.onClick ->
 	flow.showOverlayLeft(advocatePreview)
 	currentLayer = advocatePreview
 	previewReset()
 
+#TOOLKIT HANDLER
 isOpen = false
 toolkitHandler = (_isOpen) ->
 	if !_isOpen
@@ -660,8 +725,9 @@ toolkitHandler = (_isOpen) ->
 			x: 1786
 		isOpen = false
 
-stateCounter = 0
 #function check toolkit state
+stateCounter = 0
+firstTime = true
 stateCheck = (count) ->
 	if count == 0
 		toolkit.stateSwitch("blank")
@@ -671,18 +737,20 @@ stateCheck = (count) ->
 		toolkit.addChild(petitionCheckbox)
 		toolkit.addChild(emailBtn)
 		nTools.text = 1
-		nTools.x = 90
-		toolkitHandler(isOpen)
-		Utils.delay 0.75, ->
-			petitionCheckbox.addChild(checked)
-			checked.animate
-				opacity: 1
-				scale: 1
-				rotation: 360
+		nTools.x = 88
+		if firstTime
+			toolkitHandler(isOpen)
 			Utils.delay 0.75, ->
-				emailBtn.animate
+				petitionCheckbox.addChild(checked)
+				checked.animate
 					opacity: 1
-					time: 2
+					scale: 1
+					rotation: 360
+				Utils.delay 0.75, ->
+					emailBtn.animate
+						opacity: 1
+						time: 2
+					firstTime = false
 
 navAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
@@ -693,31 +761,44 @@ navHome.onClick ->
 	flow.showOverlayCenter(home_imgs)
 	currentLayer = home_imgs
 
-previewReset = ->
+#function for what to add when loading preview or detail pages
+bothReset = ->
 	stateCheck(stateCounter)
 	isOpen = false
 	currentLayer.addChild(navBar)
-	navBar.addChild(navAdvocate)
 	progressArray.forEach (p, index) ->
 		currentLayer.addChild(p)
 		p.y = 100 * (index + 1) + 250
-	if currentLayer.name == 'petition'
-		currentLayer.addChild(addBtn)
-	currentLayer.addChild(toolkit)
+	if currentLayer.name == 'advocate'
+		navBar.addChild(navAdvocate)
 	progress = 2
 	progressCheck(progress)
+	
+previewReset = ->
+	bothReset()
+	currentLayer.addChild(toolkit)
+
+detailReset = ->
+	bothReset()
+	currentLayer.addChild(addBtn)
+	currentLayer.addChild(toolkit)
 
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
 	currentLayer = advocatePreview
 	previewReset()
+
+exploreAwareness.onClick ->
+	flow.showOverlayCenter(awarenessPreview)
+	currentLayer = awarenessPreview
+	previewReset()
 	
 exploreOther.onClick ->
 	flow.showOverlayCenter(home_imgs)
 	currentLayer = home_imgs
 
-#toolkit handler
+#toolkit click event
 toolkitBar.onClick ->
 	toolkitHandler(isOpen)
 
@@ -742,6 +823,8 @@ cursorBlink = (n) ->
 		cursor.opacity = 0
 
 email_prompt.onClick ->
+	progress = 3
+	progressCheck(progress)
 	email_prompt.opacity = 0
 	emailContainer.addChild(cursor)
 	toolkit.addChild(keyboard)
@@ -782,9 +865,9 @@ sendEmail.onClick ->
 		toolkit.addChild(toolkit_success)
 		toolkit_success.animate
 			opacity: 1
+			time: 0.8
 		nTools.text = 0
-		nTools.x = 85
-	Utils.delay 5, ->
+	Utils.delay 4.5, ->
 		if isOpen
 			toolkitHandler(isOpen)
 		Utils.delay 2, ->
@@ -812,7 +895,7 @@ keyboard.onClick ->
 petitionBtn.onClick ->
 	flow.showOverlayCenter(petition)
 	currentLayer = petition
-	previewReset()
+	detailReset()
 
 #DETAIL PAGE
 addBtn.onClick ->
