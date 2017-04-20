@@ -208,13 +208,15 @@ quizRes_Awareness = new Layer
 	height: 407
 	image: "images/quizRes_Awareness.png"
 	width: 1488
+	y: 1080
+	x: Align.center
 
 exploreAwareness = new Layer
 	parent: quizRes_Awareness
-	x: 1049
+	x: 937
 	y: 192
-	width: 355
-	height: 76
+	width: 467
+	height: 77
 	opacity: 0
 
 #HOME
@@ -630,6 +632,8 @@ checkCounter = ->
 	if nAware > nAdvocate
 		winner = quizRes_Awareness
 # 		print winner
+	if nAware == nAdvocate
+		winner = 
 
 #limits only 3 choices & shows active buttons
 for q in quizArray
@@ -668,6 +672,10 @@ deliverResults = Utils.debounce 0.1, (winner) ->
 	for buttons in quizArrayP
 		animateQuizBtns(buttons)
 	winner.addChild(exploreOther)
+	if winner == quizRes_Advocate
+		winner.addChild(exploreAdvocate)
+	else if winner == quizRes_Awareness
+		winner.addChild(exploreAwareness)
 	winner.animate
 		y: (winner.y - winner.height)
 
@@ -731,7 +739,7 @@ stateCheck = (count) ->
 		toolkit.addChild(petitionCheckbox)
 		toolkit.addChild(emailBtn)
 		nTools.text = 1
-		nTools.x = 90
+		nTools.x = 88
 		if firstTime
 			toolkitHandler(isOpen)
 			Utils.delay 0.75, ->
@@ -781,6 +789,11 @@ detailReset = ->
 exploreAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
 	currentLayer = advocatePreview
+	previewReset()
+
+exploreAwareness.onClick ->
+	flow.showOverlayCenter(awarenessPreview)
+	currentLayer = awarenessPreview
 	previewReset()
 	
 exploreOther.onClick ->
@@ -856,7 +869,6 @@ sendEmail.onClick ->
 			opacity: 1
 			time: 0.8
 		nTools.text = 0
-		nTools.x = 85
 	Utils.delay 4.5, ->
 		if isOpen
 			toolkitHandler(isOpen)

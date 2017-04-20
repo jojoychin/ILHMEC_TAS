@@ -208,13 +208,15 @@ quizRes_Awareness = new Layer
 	height: 407
 	image: "images/quizRes_Awareness.png"
 	width: 1488
+	y: 1080
+	x: Align.center
 
 exploreAwareness = new Layer
 	parent: quizRes_Awareness
-	x: 1049
+	x: 937
 	y: 192
-	width: 355
-	height: 76
+	width: 467
+	height: 77
 	opacity: 0
 
 #HOME
@@ -280,6 +282,14 @@ petitionBtn = new Layer
 	height: 571
 	parent: advocatePreview
 
+officialsBtn = new Layer
+	opacity: 0
+	y: 215
+	width: 506
+	height: 571
+	parent: advocatePreview
+	x: 707
+
 addBtn = new Layer
 	opacity: 0
 	x: 200
@@ -287,11 +297,17 @@ addBtn = new Layer
 	width: 398
 	height: 124
 
-#PETITION PAGE
+#ADVOCATE DETAIL PAGES
 petition = new Layer
 	width: Screen.width
 	height: Screen.height
 	image: "images/petition.png"
+	name: 'advocate'
+	
+officials = new Layer
+	height: Screen.height
+	image: "images/officials.png"
+	width: Screen.width
 	name: 'advocate'
 
 #AWARENESS PREVIEW PAGE
@@ -322,21 +338,31 @@ navAdvocate = new Layer
 	height: 121
 	image: "images/navAdvocate.png"
 	x: 337
+	parent: navBar
+	opacity: 0
 
 navAware = new Layer
 	width: 337
 	height: 121
 	image: "images/NavAware.png"
+	parent: navBar
+	opacity: 0
+	x: 1344
+	y: -1
 
 navGive = new Layer
 	width: 337
 	height: 121
 	image: "images/navGive.png"
+	parent: navBar
+	opacity: 0
 
 navPart = new Layer
 	width: 337
 	height: 121
 	image: "images/navPart.png"
+	parent: navBar
+	opacity: 0
 
 progress1 = new Layer
 	width: 37
@@ -413,7 +439,7 @@ nTools = new TextLayer
 	fontSize: 40
 	textAlign: 'center'
 	parent: toolkit
-	x: 82
+	x: 81
 	y: 220
 	scale: 0.5
 	color: 'white'
@@ -606,6 +632,11 @@ removeOnboarding = ->
 onboarding.onClick(removeOnboarding)
 overlay.onClick(removeOnboarding)
 
+counter = 0
+nAware = 0
+nAdvocate = 0
+winner = ''
+
 #function to check counter
 checkCounter = ->
 	counter = 0
@@ -620,16 +651,15 @@ checkCounter = ->
 			if a.name == 'advocate'
 				nAdvocate++
 	if nAdvocate > nAware
-		winner = 'advocate wins'
-		print winner
-	if nAware > nAdvocate
-		winner = 'awareness wins'
-		print winner
+		winner = quizRes_Advocate
+# 		print winner
+	else if nAware > nAdvocate
+		winner = quizRes_Awareness
+# 		print winner
+	else
+		winner = quizRes_Advocate
 
 #limits only 3 choices & shows active buttons
-counter = 0
-nAware = 0
-nAdvocate = 0
 for q in quizArray
 	q.onClick ->
 		match = this.id + 1
@@ -639,7 +669,7 @@ for q in quizArray
 			quiz_next.ignoreEvents = true
 			quiz_next.onClick ->
 				checkCounter()
-				deliverResults(counter)
+				deliverResults(winner)
 		if counter < 3
 			for activeBtns in quizArrayP
 				if match == activeBtns.id
@@ -655,17 +685,23 @@ for q in quizArray
 						checkCounter()
 
 #function for slide up to delivering quiz results
-deliverResults = Utils.debounce 0.1, (count) ->
+deliverResults = Utils.debounce 0.1, (winner) ->
+	print winner
 	quiz_skip.visible = false
 	quiz_next.visible = false
 	quiz_CTA.visible = false
+	quizContainer.addChild(winner)
 	for buttons in quizArray
 		animateQuizBtns(buttons)
 	for buttons in quizArrayP
 		animateQuizBtns(buttons)
-	quizRes_Advocate.addChild(exploreOther)
-	quizRes_Advocate.animate
-		y: (quizRes_Advocate.y - quizRes_Advocate.height)
+	winner.addChild(exploreOther)
+	if winner == quizRes_Advocate
+		winner.addChild(exploreAdvocate)
+	else if winner == quizRes_Awareness
+		winner.addChild(exploreAwareness)
+	winner.animate
+		y: (winner.y - winner.height)
 
 animateQuizBtns = (_buttons) ->
 	_buttons.animate
@@ -727,7 +763,7 @@ stateCheck = (count) ->
 		toolkit.addChild(petitionCheckbox)
 		toolkit.addChild(emailBtn)
 		nTools.text = 1
-		nTools.x = 90
+		nTools.x = 88
 		if firstTime
 			toolkitHandler(isOpen)
 			Utils.delay 0.75, ->
@@ -747,6 +783,11 @@ navAdvocate.onClick ->
 	currentLayer = advocatePreview
 	previewReset()
 
+navAware.onClick ->
+	flow.showOverlayCenter(awarenessPreview)
+	currentLayer = awarenessPreview
+	previewReset()
+
 navHome.onClick ->
 	flow.showOverlayCenter(home_imgs)
 	currentLayer = home_imgs
@@ -760,7 +801,11 @@ bothReset = ->
 		currentLayer.addChild(p)
 		p.y = 100 * (index + 1) + 250
 	if currentLayer.name == 'advocate'
-		navBar.addChild(navAdvocate)
+		navAware.opacity = 0
+		navAdvocate.opacity = 1
+	else if currentLayer.name == 'awareness'
+		navAdvocate.opacity = 0
+		navAware.opacity = 1
 	progress = 2
 	progressCheck(progress)
 	
@@ -777,6 +822,11 @@ detailReset = ->
 exploreAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
 	currentLayer = advocatePreview
+	previewReset()
+
+exploreAwareness.onClick ->
+	flow.showOverlayCenter(awarenessPreview)
+	currentLayer = awarenessPreview
 	previewReset()
 	
 exploreOther.onClick ->
@@ -852,7 +902,6 @@ sendEmail.onClick ->
 			opacity: 1
 			time: 0.8
 		nTools.text = 0
-		nTools.x = 85
 	Utils.delay 4.5, ->
 		if isOpen
 			toolkitHandler(isOpen)
@@ -878,6 +927,11 @@ keyboard.onClick ->
 		sendEmail.ignoreEvents = false
 
 #FROM ADVOCATE PREVIEW PAGE
+petitionBtn.onClick ->
+	flow.showOverlayCenter(petition)
+	currentLayer = petition
+	detailReset()
+
 petitionBtn.onClick ->
 	flow.showOverlayCenter(petition)
 	currentLayer = petition
