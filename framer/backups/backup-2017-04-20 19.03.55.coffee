@@ -1,4 +1,5 @@
 require('FlowComponentCycle')
+{ƒ,ƒƒ} = require 'findModule'
 
 # Define and set custom device
 Framer.Device.customize
@@ -19,6 +20,16 @@ attract2 = new Layer
 	height: Screen.height
 	image: "images/attract-02.png"
 
+attract3 = new Layer
+	image: "images/attract-03.png"
+	width: Screen.width
+	height: Screen.height
+
+attract4 = new Layer
+	image: "images/attract-04.png"
+	width: Screen.width
+	height: Screen.height
+
 attract1_CTA = new Layer
 	width: 784
 	height: 359
@@ -35,7 +46,21 @@ attract2_CTA = new Layer
 	x: 77
 	y: 685
 
-attractArray = [attract1, attract2]
+attract3_CTA = new Layer
+	height: 359
+	image: "images/attract3_CTA.png"
+	width: 784
+	parent: attract3
+	y: 665
+	x: 64
+
+attract4_CTA = new Layer
+	height: 359
+	image: "images/attract4_CTA.png"
+	width: 784
+	parent: attract4
+	x: 1070
+	y: 665
 
 overlay = new Layer
 	width: Screen.width
@@ -282,6 +307,14 @@ petitionBtn = new Layer
 	height: 571
 	parent: advocatePreview
 
+officialsBtn = new Layer
+	opacity: 0
+	y: 215
+	width: 506
+	height: 571
+	parent: advocatePreview
+	x: 707
+
 addBtn = new Layer
 	opacity: 0
 	x: 200
@@ -289,12 +322,22 @@ addBtn = new Layer
 	width: 398
 	height: 124
 
-#PETITION PAGE
+#ADVOCATE DETAIL PAGES
 petition = new Layer
 	width: Screen.width
 	height: Screen.height
 	image: "images/petition.png"
-	name: 'advocate'
+	name: 'petition'
+	
+officials = new Layer
+	height: Screen.height
+	image: "images/officials.png"
+	width: Screen.width
+	name: 'officials'
+
+advocatePreview.classList.add('advocate')
+petition.classList.add('advocate')
+officials.classList.add('advocate')
 
 #AWARENESS PREVIEW PAGE
 
@@ -304,7 +347,47 @@ awarenessPreview = new Layer
 	width: Screen.width
 	name: 'awareness'
 
+rallyBtn = new Layer
+	opacity: 0
+	x: 118
+	y: 221
+	width: 506
+	height: 571
+	parent: awarenessPreview
+
+socialmediaBtn = new Layer
+	opacity: 0
+	y: 215
+	width: 506
+	height: 571
+	parent: awarenessPreview
+	x: 707
+
+#AWARE DETAIL PAGE
+rally = new Layer
+	height: Screen.height
+	image: "images/rally.png"
+	width: Screen.width
+	name: 'rally'
+
+socialmedia = new Layer
+	height: Screen.height
+	image: "images/socialmedia.png"
+	width: Screen.width
+	name: 'socialmedia'
+
+awarenessPreview.classList.add('awareness')
+rally.classList.add('awareness')
+socialmedia.classList.add('awareness')
+
 #NAV
+
+backBtn = new Layer
+	opacity: 0
+	y: 814
+	x: 119
+	width: 252
+	height: 36
 
 navBar = new Layer
 	width: 1681
@@ -324,21 +407,31 @@ navAdvocate = new Layer
 	height: 121
 	image: "images/navAdvocate.png"
 	x: 337
+	parent: navBar
+	opacity: 0
 
 navAware = new Layer
 	width: 337
 	height: 121
 	image: "images/NavAware.png"
+	parent: navBar
+	opacity: 0
+	x: 1344
+	y: -1
 
 navGive = new Layer
 	width: 337
 	height: 121
 	image: "images/navGive.png"
+	parent: navBar
+	opacity: 0
 
 navPart = new Layer
 	width: 337
 	height: 121
 	image: "images/navPart.png"
+	parent: navBar
+	opacity: 0
 
 progress1 = new Layer
 	width: 37
@@ -402,6 +495,44 @@ toolkit_success = new Layer
 	y: 57
 	x: 137
 
+tool1 = new Layer
+	backgroundColor: 'transparent'
+	x: 173
+	y: 275
+	height: 45
+	width: 650
+	parent: toolkit
+	name: 'tool1'
+
+tool2 = new Layer
+	backgroundColor: 'transparent'
+	x: 173
+	y: 330
+	height: 45
+	width: 650
+	name: 'tool2'
+	parent: toolkit
+
+tool3 = new Layer
+	backgroundColor: 'transparent'
+	x: 173
+	y: 385
+	height: 45
+	width: 650
+	name: 'tool3'
+	parent: toolkit
+	
+tool4 = new Layer
+	backgroundColor: 'transparent'
+	x: 173
+	y: 430
+	height: 45
+	width: 650
+	name: 'tool4'
+	parent: toolkit
+
+toolContainerArray = [tool1, tool2, tool3, tool4]
+
 toolkitBar = new Layer
 	opacity: 0
 	parent: toolkit
@@ -412,22 +543,47 @@ toolkitBar = new Layer
 
 nTools = new TextLayer
 	text: 0
-	fontSize: 40
+	fontSize: 20
 	textAlign: 'center'
 	parent: toolkit
-	x: 85
-	y: 220
-	scale: 0.5
+	x: 88
+	y: 233
 	color: 'white'
 	fontFamily: 'Gotham'
 	fontStyle: 'bold'
 
-petitionCheckbox = new Layer
+# petitionCheckbox = new Layer
+# 	height: 39
+# 	image: "images/tool1_unchecked.png"
+# 	width: 557
+# 	x: 173
+# 	y: 275
+
+officials_unchecked = new Layer
+	width: 655
 	height: 39
-	image: "images/tool1_unchecked.png"
-	width: 557
-	x: 173
-	y: 275
+	image: "images/officials_unchecked.png"
+	name: 'officials_unchecked'
+
+petition_unchecked = new Layer
+	width: 579
+	height: 39
+	image: "images/petition_unchecked.png"
+	name: 'petition_unchecked'
+
+rally_unchecked = new Layer
+	width: 655
+	height: 39
+	image: "images/rally_unchecked.png"
+	name: 'rally_unchecked'
+
+socialmedia_unchecked = new Layer
+	width: 959
+	height: 39
+	image: "images/socialmedia_unchecked.png"
+	name: 'socialmedia_unchecked'
+
+toolList = [petition_unchecked, officials_unchecked, rally_unchecked, socialmedia_unchecked]
 
 checked = new Layer
 	height: 37
@@ -508,7 +664,7 @@ flow = new FlowComponent
 # flow.showNext(home_imgs)
 flow.showNext(attract1)
 
-flow.layers = [ attract1, attract2 ]
+flow.layers = [ attract1, attract2, attract3, attract4 ]
 flow.cycle( 6000 )
 
 cornerTransition = ->
@@ -522,6 +678,8 @@ attractEnd = ->
 	flow.stopCycle()
 	attract2_CTA.visible = false
 	attract1_CTA.visible = false
+	attract3_CTA.visible = false
+	attract4_CTA.visible = false
 	flow.showOverlayCenter(overlay)
 	overlay.addChild(onboarding)
 	attract1.ignoreEvents and attract2.ignoreEvents
@@ -529,8 +687,12 @@ attractEnd = ->
 #TAP TO ENTER
 attract1.onClick(attractEnd)
 attract2.onClick(attractEnd)
+attract3.onClick(attractEnd)
+attract4.onClick(attractEnd)
 attract1_CTA.onClick(attractEnd)
 attract2_CTA.onClick(attractEnd)
+attract3_CTA.onClick(attractEnd)
+attract4_CTA.onClick(attractEnd)
 
 for button in quizArray
 	button.parent = quizContainer
@@ -629,9 +791,11 @@ checkCounter = ->
 	if nAdvocate > nAware
 		winner = quizRes_Advocate
 # 		print winner
-	if nAware > nAdvocate
+	else if nAware > nAdvocate
 		winner = quizRes_Awareness
 # 		print winner
+	else
+		winner = quizRes_Advocate
 
 #limits only 3 choices & shows active buttons
 for q in quizArray
@@ -660,7 +824,7 @@ for q in quizArray
 
 #function for slide up to delivering quiz results
 deliverResults = Utils.debounce 0.1, (winner) ->
-	print winner
+# 	print winner
 	quiz_skip.visible = false
 	quiz_next.visible = false
 	quiz_CTA.visible = false
@@ -728,20 +892,25 @@ toolkitHandler = (_isOpen) ->
 #function check toolkit state
 stateCounter = 0
 firstTime = true
+lastToolAdded = ""
+
 stateCheck = (count) ->
 	if count == 0
 		toolkit.stateSwitch("blank")
 		toolkit.addChild(browsingBtn)
 	else if count == 1
+		for tool in toolList
+			if tool.name == lastToolAdded
+				temp = tool
 		toolkit.stateSwitch("normal")
-		toolkit.addChild(petitionCheckbox)
+		tool1.addChild(temp)
 		toolkit.addChild(emailBtn)
 		nTools.text = 1
-		nTools
+		nTools.x = 94
 		if firstTime
 			toolkitHandler(isOpen)
 			Utils.delay 0.75, ->
-				petitionCheckbox.addChild(checked)
+				temp.addChild(checked)
 				checked.animate
 					opacity: 1
 					scale: 1
@@ -751,15 +920,37 @@ stateCheck = (count) ->
 						opacity: 1
 						time: 2
 					firstTime = false
-
+	else if count >= 2
+		for place in toolContainerArray
+			if count <= 4
+				tempTool = "tool" + (count).toString()
+				if tempTool == place.name
+					toolNum = place
+		for tool in toolList
+			if tool.name == lastToolAdded
+				temp = tool
+		toolNum.addChild(temp)
+		checked = checked.copy()
+		temp.addChild(checked)
+		toolkit.addChild(emailBtn)
+		nTools.text = count
+		nTools.x = 94
+		
 navAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
 	currentLayer = advocatePreview
 	previewReset()
 
+navAware.onClick ->
+	flow.showOverlayCenter(awarenessPreview)
+	currentLayer = awarenessPreview
+	previewReset()
+
 navHome.onClick ->
 	flow.showOverlayCenter(home_imgs)
 	currentLayer = home_imgs
+
+toolkitArray = []
 
 #function for what to add when loading preview or detail pages
 bothReset = ->
@@ -769,8 +960,12 @@ bothReset = ->
 	progressArray.forEach (p, index) ->
 		currentLayer.addChild(p)
 		p.y = 100 * (index + 1) + 250
-	if currentLayer.name == 'advocate'
-		navBar.addChild(navAdvocate)
+	if currentLayer.classList.contains('advocate')
+		navAware.opacity = 0
+		navAdvocate.opacity = 1
+	else if currentLayer.classList.contains('awareness')
+		navAdvocate.opacity = 0
+		navAware.opacity = 1
 	progress = 2
 	progressCheck(progress)
 	
@@ -780,7 +975,18 @@ previewReset = ->
 
 detailReset = ->
 	bothReset()
-	currentLayer.addChild(addBtn)
+	currentLayer.addChild(backBtn)
+	if toolkitArray[0] != undefined
+		for t in toolkitArray
+			print t
+			if currentLayer.name == t
+				addBtn.ignoreEvents = true
+				print 'you have already added this tool'
+			else
+				currentLayer.addChild(addBtn)
+				addBtn.ignoreEvents = false
+	else
+		currentLayer.addChild(addBtn)
 	currentLayer.addChild(toolkit)
 
 #QUIZ RESULTS
@@ -860,14 +1066,15 @@ sendEmail.onClick ->
 	keyboard.animate
 		y: 1080
 		time: 0.8
-	Utils.delay 1, ->
+	Utils.delay 0.2, ->
 		toolkit_success.opacity = 0
 		toolkit.addChild(toolkit_success)
 		toolkit_success.animate
 			opacity: 1
-			time: 0.8
+			time: 0.5
 		nTools.text = 0
-	Utils.delay 4.5, ->
+		nTools.x = 88
+	Utils.delay 6, ->
 		if isOpen
 			toolkitHandler(isOpen)
 		Utils.delay 2, ->
@@ -897,8 +1104,39 @@ petitionBtn.onClick ->
 	currentLayer = petition
 	detailReset()
 
+officialsBtn.onClick ->
+	flow.showOverlayCenter(officials)
+	currentLayer = officials
+	detailReset()
+
+#FROM AWARENESS PREVIEW PAGE
+rallyBtn.onClick ->
+	flow.showOverlayCenter(rally)
+	currentLayer = rally
+	detailReset()
+
+socialmediaBtn.onClick ->
+	flow.showOverlayCenter(socialmedia)
+	currentLayer = socialmedia
+	detailReset()
+
 #DETAIL PAGE
+backBtn.onClick ->
+# 	print currentLayer
+	if currentLayer.classList.contains('advocate')
+		flow.showOverlayCenter(advocatePreview)
+		currentLayer = advocatePreview
+		previewReset()
+	else if currentLayer.classList.contains('awareness')
+		flow.showOverlayCenter(awarenessPreview)
+		currentLayer = awarenessPreview
+		previewReset()
+
 addBtn.onClick ->
-	print this.parent
+	print currentLayer.name + '_unchecked'
+	toolkitArray.push(currentLayer)
+	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
+	currentLayer.classList.contains('added')
+	addBtn.ignoreEvents = true

@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<script type="text/javascript">
+		// This automatically sets the right viewport scale on mobile devices
+		(function() {
+ 		var scale = 1 / window.devicePixelRatio
+ 		var viewport = "width=device-width, height=device-height, initial-scale=" + scale + ", maximum-scale=" + scale + ", user-scalable=no"
+ 		var iOS = /iPad|iPhone|iPod/.test(navigator.platform)
+ 		if (iOS) { viewport += ", shrink-to-fit=no" }
+ 		document.write("<meta name=\"viewport\" content=\"" + viewport + "\">")
+		})()
+		</script>
+
+		<link rel="apple-touch-icon" href="framer/images/icon-120.png">
+		<link rel="apple-touch-icon" href="framer/images/icon-76.png" sizes="76x76">
+		<link rel="apple-touch-icon" href="framer/images/icon-120.png" sizes="120x120">
+		<link rel="apple-touch-icon" href="framer/images/icon-152.png" sizes="152x152">
+		<link rel="apple-touch-icon" href="framer/images/icon-180.png" sizes="180x180">
+		<link rel="apple-touch-icon" href="framer/images/icon-192.png" sizes="192x192">
+
+		<link rel="stylesheet" type="text/css" href="framer/style.css?nocache=ad612f438d21dd7e83671aa0b8887dd2">
+
+		<script src="framer/coffee-script.js"></script>
+		<script src="framer/framer.js?nocache=001556a56a89a4995a3655e598216c22"></script>
+		<script src="framer/framer.generated.js?nocache=82201c89db0d6f2e0adca8349d58d5d8"></script>
+		<script src="framer/framer.modules.js?nocache=c6b51ac9697721fc3b114a2ca3322ffb"></script>
+		<script>document.addEventListener("DOMContentLoaded", function() {window.__framerClientCodeId = 2649;window.__framerNew = function (n,loc,th,i){if (i == null) { return i };i.__framerInstanceInfo = _.defaults({name:n,location:loc,hash:th},i.__framerInstanceInfo);_.defaults(i.__framerInstanceInfo,{name:"Untitled"});return i;};window.__framerAnimation = function (th,a){if (a.isNoop === true) {return a;};var l = a.layer;if (l == null) { return a; };if (l.__framerAnimationInfo == null) {l.__framerAnimationInfo = {};};l.__framerAnimationInfo[th] = {originalState:a._originalState, destinationProperties: a.properties, destinationOptions: a.options};return a;};(function() {
+  var addBtn, advocatePreview, animateQuizBtns, attachProgress, attract1, attract1_CTA, attract2, attract2_CTA, attract3, attract3_CTA, attract4, attract4_CTA, attractEnd, awarenessPreview, bothReset, browsingBtn, button, checkCounter, checked, cornerTransition, counter, currentLayer, cursor, cursorBlink, deliverResults, detailReset, emailBtn, emailContainer, email_prompt, exploreAdvocate, exploreAwareness, exploreOther, fakeEmail, firstTime, flow, homeOArray, home_imgs, home_overlay1, home_overlay2, home_overlay3, home_overlay4, home_text, isOpen, j, k, keyboard, l, len, len1, len2, len3, m, nAdvocate, nAware, nTools, navAdvocate, navAware, navBar, navGive, navHome, navPart, o, officials, officialsBtn, onboarding, overlay, petition, petitionBtn, petitionCheckbox, previewReset, progress, progress1, progress2, progress3, progressArray, progressCheck, q, quiz1, quiz1p, quiz2, quiz2p, quiz3, quiz3p, quiz4, quiz4p, quiz5, quiz5p, quiz6, quiz6p, quiz7, quiz7p, quiz8, quiz8p, quiz9, quiz9p, quizArray, quizArrayP, quizContainer, quizRes_Advocate, quizRes_Awareness, quiz_CTA, quiz_next, quiz_skip, rally, rallyBtn, removeOnboarding, sendEmail, socialmedia, socialmediaBtn, stateCheck, stateCounter, toolkit, toolkitBar, toolkitHandler, toolkit_overlay, toolkit_success, type, typeSpeed, winner;
+
+  require('FlowComponentCycle');
+
+  Framer.Device.customize({
+    deviceType: "fullscreen",
+    screenWidth: 1920,
+    screenHeight: 1080,
+    deviceScale: 1
+  });
+
+  Canvas.backgroundColor = "black";
+
+  attract1 = window.__framerNew("attract1", "11:15-15:0", "#e17ea642",new Layer({
+    width: Screen.width,
+    height: Screen.height,
+    image: "images/attract-01.png"
+  }));
+
+  attract2 = window.__framerNew("attract2", "16:15-20:0", "#e8e4869d",new Layer({
+    width: Screen.width,
+    height: Screen.height,
+    image: "images/attract-02.png"
+  }));
+
+  attract3 = window.__framerNew("attract3", "21:15-25:0", "#175c31543",new Layer({
+    image: "images/attract-03.png",
+    width: Screen.width,
+    height: Screen.height
+  }));
+
+  attract4 = window.__framerNew("attract4", "26:15-30:0", "#17d28f59e",new Layer({
+    image: "images/attract-04.png",
+    width: Screen.width,
+    height: Screen.height
+  }));
+
+  attract1_CTA = window.__framerNew("attract1_CTA", "31:19-38:0", "#10a3fe248",new Layer({
+    width: 784,
+    height: 359,
+    image: "images/attract1_CTA.png",
+    parent: attract1,
+    x: 1080,
+    y: 685
+  }));
+
+  attract2_CTA = window.__framerNew("attract2_CTA", "39:19-46:0", "#149494940",new Layer({
+    width: 785,
+    height: 359,
+    image: "images/attract2_CTA.png",
+    parent: attract2,
+    x: 77,
+    y: 685
+  }));
+
+  attract3_CTA = window.__framerNew("attract3_CTA", "47:19-54:0", "#10dcb5e83",new Layer({
+    height: 359,
+    image: "images/attract3_CTA.png",
+    width: 784,
+    parent: attract3,
+    y: 665,
+    x: 64
+  }));
+
+  attract4_CTA = window.__framerNew("attract4_CTA", "55:19-62:0", "#d24d73c6",new Layer({
+    height: 359,
+    image: "images/attract4_CTA.png",
+    width: 784,
+    parent: attract4,
+    x: 1070,
+    y: 665
+  }));
+
+  overlay = window.__framerNew("overlay", "63:14-67:0", "#96891384",new Layer({
+    width: Screen.width,
+    height: Screen.height,
+    image: "images/overlay.png"
+  }));
+
+  onboarding = window.__framerNew("onboarding", "68:17-74:0", "#9e193a62",new Layer({
+    width: 1271,
+    height: 571,
+    x: Align.center,
+    y: Align.center,
+    image: "images/onboarding.png"
+  }));
+
+  quizContainer = window.__framerNew("quizContainer", "75:20-79:0", "#fc0c56de",new Layer({
+    width: Screen.width,
+    height: Screen.height,
+    opacity: 0
+  }));
+
+  quiz1 = window.__framerNew("quiz1", "80:12-84:0", "#87523be7",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz1.png"
+  }));
+
+  quiz1p = window.__framerNew("quiz1p", "85:13-90:0", "#8ec633c3",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz1p.png",
+    name: 'awareness'
+  }));
+
+  quiz2 = window.__framerNew("quiz2", "91:12-95:0", "#8377d7c7",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz2.png"
+  }));
+
+  quiz2p = window.__framerNew("quiz2p", "96:13-101:0", "#8aebcfa3",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz2p.png",
+    name: 'awareness'
+  }));
+
+  quiz3 = window.__framerNew("quiz3", "102:12-106:0", "#150cdabd6",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz3.png"
+  }));
+
+  quiz3p = window.__framerNew("quiz3p", "107:13-112:0", "#15841a3b2",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz3p.png",
+    name: 'advocate'
+  }));
+
+  quiz4 = window.__framerNew("quiz4", "113:12-117:0", "#14cf347b6",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz4.png"
+  }));
+
+  quiz4p = window.__framerNew("quiz4p", "118:13-123:0", "#154673f92",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz4p.png",
+    name: 'awareness'
+  }));
+
+  quiz5 = window.__framerNew("quiz5", "124:12-128:0", "#14918e396",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz5.png"
+  }));
+
+  quiz5p = window.__framerNew("quiz5p", "129:13-134:0", "#1508cdb72",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz5p.png",
+    name: 'awareness'
+  }));
+
+  quiz6 = window.__framerNew("quiz6", "135:12-139:0", "#1453e7f76",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz6.png"
+  }));
+
+  quiz6p = window.__framerNew("quiz6p", "140:13-145:0", "#d22b259d",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz6p.png",
+    name: 'advocate'
+  }));
+
+  quiz7 = window.__framerNew("quiz7", "146:12-150:0", "#141641b56",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz7.png"
+  }));
+
+  quiz7p = window.__framerNew("quiz7p", "151:13-156:0", "#ce50c17d",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz7p.png",
+    name: 'advocate'
+  }));
+
+  quiz8 = window.__framerNew("quiz8", "157:12-161:0", "#13d89b736",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz8.png"
+  }));
+
+  quiz8p = window.__framerNew("quiz8p", "162:13-167:0", "#ca765d5d",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz8p.png",
+    name: 'advocate'
+  }));
+
+  quiz9 = window.__framerNew("quiz9", "168:12-172:0", "#139af5316",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz9.png"
+  }));
+
+  quiz9p = window.__framerNew("quiz9p", "173:13-178:0", "#c69bf93d",new Layer({
+    width: 499,
+    height: 265,
+    image: "images/quiz9p.png",
+    name: 'advocate'
+  }));
+
+  quizArray = [quiz1, quiz2, quiz3, quiz4, quiz5, quiz6, quiz7, quiz8, quiz9];
+
+  quizArrayP = [quiz1p, quiz2p, quiz3p, quiz4p, quiz5p, quiz6p, quiz7p, quiz8p, quiz9p];
+
+  quiz_CTA = window.__framerNew("quiz_CTA", "182:15-189:0", "#f31b6a61",new Layer({
+    width: 1028,
+    height: 35,
+    x: Align.center,
+    y: 65,
+    image: "images/quiz_CTA .png",
+    parent: quizContainer
+  }));
+
+  quiz_next = window.__framerNew("quiz_next", "190:16-198:0", "#b7ab9725",new Layer({
+    width: 181,
+    height: 73,
+    image: "images/quiz_next.png",
+    parent: quizContainer,
+    opacity: 0.2,
+    x: 1520,
+    y: 927
+  }));
+
+  quiz_skip = window.__framerNew("quiz_skip", "199:16-206:0", "#15e962afc",new Layer({
+    width: 58,
+    height: 26,
+    image: "images/quiz_skip.png",
+    parent: quizContainer,
+    x: 250,
+    y: 927
+  }));
+
+  quizRes_Advocate = window.__framerNew("quizRes_Advocate", "207:23-214:0", "#14e3fed70",new Layer({
+    width: 1477,
+    height: 407,
+    image: "images/quizRes_Advocate.png",
+    y: 1080,
+    x: Align.center,
+    parent: quizContainer
+  }));
+
+  exploreAdvocate = window.__framerNew("exploreAdvocate", "215:22-222:0", "#112b3eb32",new Layer({
+    parent: quizRes_Advocate,
+    x: 1049,
+    y: 192,
+    width: 355,
+    height: 76,
+    opacity: 0
+  }));
+
+  exploreOther = window.__framerNew("exploreOther", "223:19-229:0", "#d5e3cc5d",new Layer({
+    y: 268,
+    x: 30,
+    width: 524,
+    height: 77,
+    opacity: 0
+  }));
+
+  quizRes_Awareness = window.__framerNew("quizRes_Awareness", "230:24-236:0", "#133f317db",new Layer({
+    height: 407,
+    image: "images/quizRes_Awareness.png",
+    width: 1488,
+    y: 1080,
+    x: Align.center
+  }));
+
+  exploreAwareness = window.__framerNew("exploreAwareness", "237:23-246:0", "#10b0d3a73",new Layer({
+    parent: quizRes_Awareness,
+    x: 937,
+    y: 192,
+    width: 467,
+    height: 77,
+    opacity: 0
+  }));
+
+  home_imgs = window.__framerNew("home_imgs", "247:16-251:0", "#9dc71758",new Layer({
+    height: Screen.height,
+    image: "images/home_imgs.png",
+    width: Screen.width
+  }));
+
+  home_overlay1 = window.__framerNew("home_overlay1", "252:20-258:0", "#12c05f197",new Layer({
+    height: 540,
+    image: "images/home_overlayquarter.png",
+    width: 961,
+    x: -0.5,
+    parent: home_imgs
+  }));
+
+  home_overlay2 = window.__framerNew("home_overlay2", "259:20-265:0", "#1032e2bb0",new Layer({
+    height: 540,
+    image: "images/home_overlayquarter.png",
+    width: 961,
+    x: Align.right,
+    parent: home_imgs
+  }));
+
+  home_overlay3 = window.__framerNew("home_overlay3", "266:20-273:0", "#15fcf1414",new Layer({
+    height: 540,
+    image: "images/home_overlayquarter.png",
+    width: 961,
+    x: -0.5,
+    y: 539,
+    parent: home_imgs
+  }));
+
+  home_overlay4 = window.__framerNew("home_overlay4", "274:20-281:0", "#124512957",new Layer({
+    height: 540,
+    image: "images/home_overlayquarter.png",
+    width: 961,
+    x: Align.right,
+    y: 539,
+    parent: home_imgs
+  }));
+
+  homeOArray = [home_overlay1, home_overlay2, home_overlay3, home_overlay4];
+
+  home_text = window.__framerNew("home_text", "284:16-293:0", "#b7354cbf",new Layer({
+    height: 672,
+    image: "images/home_text.png",
+    width: 1537,
+    parent: home_imgs,
+    x: Align.center,
+    y: Align.center
+  }));
+
+  advocatePreview = window.__framerNew("advocatePreview", "294:22-299:0", "#14cf6365b",new Layer({
+    width: Screen.width,
+    height: Screen.height,
+    image: "images/AdvocatePreview.png",
+    name: 'advocate'
+  }));
+
+  petitionBtn = window.__framerNew("petitionBtn", "300:18-307:0", "#169f2c15c",new Layer({
+    opacity: 0,
+    x: 118,
+    y: 221,
+    width: 506,
+    height: 571,
+    parent: advocatePreview
+  }));
+
+  officialsBtn = window.__framerNew("officialsBtn", "308:19-315:0", "#a90a3fd5",new Layer({
+    opacity: 0,
+    y: 215,
+    width: 506,
+    height: 571,
+    parent: advocatePreview,
+    x: 707
+  }));
+
+  addBtn = window.__framerNew("addBtn", "316:13-323:21", "#16d37c812",new Layer({
+    opacity: 0,
+    x: 200,
+    y: 637,
+    width: 398,
+    height: 124
+  }));
+
+  petition = window.__framerNew("petition", "324:15-329:0", "#131d60c57",new Layer({
+    width: Screen.width,
+    height: Screen.height,
+    image: "images/petition.png",
+    name: 'advocate'
+  }));
+
+  officials = window.__framerNew("officials", "330:16-337:0", "#126a3df5d",new Layer({
+    height: Screen.height,
+    image: "images/officials.png",
+    width: Screen.width,
+    name: 'advocate'
+  }));
+
+  awarenessPreview = window.__framerNew("awarenessPreview", "338:23-343:0", "#16737d871",new Layer({
+    height: Screen.height,
+    image: "images/awarenessPreview.png",
+    width: Screen.width,
+    name: 'awareness'
+  }));
+
+  rallyBtn = window.__framerNew("rallyBtn", "344:15-351:0", "#15a5eea59",new Layer({
+    opacity: 0,
+    x: 118,
+    y: 221,
+    width: 506,
+    height: 571,
+    parent: awarenessPreview
+  }));
+
+  socialmediaBtn = window.__framerNew("socialmediaBtn", "352:21-360:17", "#1205d7a37",new Layer({
+    opacity: 0,
+    y: 215,
+    width: 506,
+    height: 571,
+    parent: awarenessPreview,
+    x: 707
+  }));
+
+  rally = window.__framerNew("rally", "361:12-366:0", "#14b19fb3b",new Layer({
+    height: Screen.height,
+    image: "images/rally.png",
+    width: Screen.width,
+    name: 'awareness'
+  }));
+
+  socialmedia = window.__framerNew("socialmedia", "367:18-374:0", "#bab5957b",new Layer({
+    height: Screen.height,
+    image: "images/socialmedia.png",
+    width: Screen.width,
+    name: 'awareness'
+  }));
+
+  navBar = window.__framerNew("navBar", "375:13-381:0", "#17ef13539",new Layer({
+    width: 1681,
+    height: 121,
+    image: "images/navBar.png",
+    x: Align.center,
+    y: 959
+  }));
+
+  navHome = window.__framerNew("navHome", "382:14-387:0", "#dba0351e",new Layer({
+    parent: navBar,
+    width: 331,
+    height: 121,
+    opacity: 0
+  }));
+
+  navAdvocate = window.__framerNew("navAdvocate", "388:18-395:0", "#14b1fa05c",new Layer({
+    width: 337,
+    height: 121,
+    image: "images/navAdvocate.png",
+    x: 337,
+    parent: navBar,
+    opacity: 0
+  }));
+
+  navAware = window.__framerNew("navAware", "396:15-404:0", "#10f776f1c",new Layer({
+    width: 337,
+    height: 121,
+    image: "images/NavAware.png",
+    parent: navBar,
+    opacity: 0,
+    x: 1344,
+    y: -1
+  }));
+
+  navGive = window.__framerNew("navGive", "405:14-411:0", "#16569b4d2",new Layer({
+    width: 337,
+    height: 121,
+    image: "images/navGive.png",
+    parent: navBar,
+    opacity: 0
+  }));
+
+  navPart = window.__framerNew("navPart", "412:14-418:0", "#c20a9d36",new Layer({
+    width: 337,
+    height: 121,
+    image: "images/navPart.png",
+    parent: navBar,
+    opacity: 0
+  }));
+
+  progress1 = window.__framerNew("progress1", "419:16-423:0", "#994f0651",new Layer({
+    width: 37,
+    height: 73,
+    image: "images/progress1.png"
+  }));
+
+  progress1.states = {
+    inactive: {
+      image: "images/progress1.png"
+    },
+    active: {
+      image: "images/progrss1_A.png"
+    }
+  };
+
+  progress2 = window.__framerNew("progress2", "430:16-434:0", "#11aed507c",new Layer({
+    width: 37,
+    height: 73,
+    image: "images/progress2.png"
+  }));
+
+  progress2.states = {
+    inactive: {
+      image: "images/progress2.png"
+    },
+    active: {
+      image: "images/progress2_A.png"
+    }
+  };
+
+  progress3 = window.__framerNew("progress3", "441:16-445:0", "#11712ec5c",new Layer({
+    width: 37,
+    height: 73,
+    image: "images/progress3.png"
+  }));
+
+  progress3.states = {
+    inactive: {
+      image: "images/progress3.png"
+    },
+    active: {
+      image: "images/progress3_A.png"
+    }
+  };
+
+  progressArray = [progress1, progress2, progress3];
+
+  toolkit_overlay = window.__framerNew("toolkit_overlay", "454:22-459:0", "#e4775c95",new Layer({
+    width: Screen.width,
+    height: Screen.height,
+    visible: true,
+    image: "images/toolkit_overlay.png"
+  }));
+
+  toolkit = window.__framerNew("toolkit", "460:14-467:0", "#d79e6e7d",new Layer({
+    width: 1084,
+    height: 796,
+    image: "images/toolkit_blank.png",
+    x: 1786,
+    y: 100,
+    parent: toolkit_overlay
+  }));
+
+  toolkit.states = {
+    blank: {
+      image: "images/toolkit_blank.png"
+    },
+    normal: {
+      image: "images/toolkit_1.png"
+    }
+  };
+
+  toolkit_success = window.__framerNew("toolkit_success", "474:22-480:0", "#10d003a97",new Layer({
+    height: 673,
+    image: "images/toolkit_success.png",
+    width: 888,
+    y: 57,
+    x: 137
+  }));
+
+  toolkitBar = window.__framerNew("toolkitBar", "481:17-488:0", "#16832bfe1",new Layer({
+    opacity: 0,
+    parent: toolkit,
+    x: 59,
+    y: 58,
+    width: 175,
+    height: 668
+  }));
+
+  nTools = window.__framerNew("nTools", "489:13-499:0", "#11ce0fcf0",new TextLayer({
+    text: 0,
+    fontSize: 20,
+    textAlign: 'center',
+    parent: toolkit,
+    x: 90,
+    y: 233,
+    color: 'white',
+    fontFamily: 'Gotham',
+    fontStyle: 'bold'
+  }));
+
+  petitionCheckbox = window.__framerNew("petitionCheckbox", "500:23-506:0", "#153f406b4",new Layer({
+    height: 39,
+    image: "images/tool1_unchecked.png",
+    width: 557,
+    x: 173,
+    y: 275
+  }));
+
+  checked = window.__framerNew("checked", "507:14-513:0", "#129757faf",new Layer({
+    height: 37,
+    image: "images/checked.png",
+    width: 37,
+    opacity: 0,
+    scale: 0
+  }));
+
+  browsingBtn = window.__framerNew("browsingBtn", "514:18-520:0", "#864ec617",new Layer({
+    opacity: 0,
+    x: 164,
+    y: 599,
+    width: 303,
+    height: 93
+  }));
+
+  emailBtn = window.__framerNew("emailBtn", "521:15-528:0", "#e2c567f8",new Layer({
+    width: 289,
+    height: 73,
+    image: "images/sendEmail.png",
+    x: 518,
+    y: 606,
+    opacity: 0.2
+  }));
+
+  emailContainer = window.__framerNew("emailContainer", "529:21-535:0", "#1234b498b",new Layer({
+    height: 74,
+    image: "images/emailContainer.png",
+    width: 448,
+    x: 500,
+    y: 606
+  }));
+
+  email_prompt = window.__framerNew("email_prompt", "536:19-542:0", "#17ea81558",new Layer({
+    height: 26,
+    image: "images/email_prompt.png",
+    width: 260,
+    y: 24,
+    x: 18
+  }));
+
+  cursor = window.__framerNew("cursor", "543:13-549:0", "#daf470b6",new Layer({
+    height: 28,
+    image: "images/cursor.png",
+    width: 2,
+    x: 20,
+    y: 21
+  }));
+
+  fakeEmail = window.__framerNew("fakeEmail", "550:16-558:0", "#137bf9f9d",new Layer({
+    width: 350,
+    backgroundColor: 'transparent',
+    fontFamily: 'Gotham',
+    fontSize: 36,
+    y: 24,
+    x: 34,
+    height: 53
+  }));
+
+  fakeEmail.html = '';
+
+  fakeEmail.textTransform = "uppercase";
+
+  keyboard = window.__framerNew("keyboard", "562:15-568:0", "#9bb850db",new Layer({
+    height: 426,
+    image: "images/keyboard.png",
+    width: 831,
+    x: -361,
+    y: 1080
+  }));
+
+  sendEmail = window.__framerNew("sendEmail", "569:16-580:12", "#172eea275",new Layer({
+    width: 37,
+    height: 37,
+    image: "images/send.png",
+    x: 396,
+    y: 18,
+    opacity: 0.1,
+    parent: emailContainer
+  }));
+
+  currentLayer = overlay;
+
+  flow = window.__framerNew("flow", "582:7-582:23", "#b01a7e59",new FlowComponent);
+
+  flow.showNext(attract1);
+
+  flow.layers = [attract1, attract2, attract3, attract4];
+
+  flow.cycle(6000);
+
+  cornerTransition = function() {
+    var transition;
+    return transition = {
+      advocatePreview: {
+        x: Align.center,
+        y: Align.center
+      }
+    };
+  };
+
+  attractEnd = function() {
+    flow.stopCycle();
+    attract2_CTA.visible = false;
+    attract1_CTA.visible = false;
+    attract3_CTA.visible = false;
+    attract4_CTA.visible = false;
+    flow.showOverlayCenter(overlay);
+    overlay.addChild(onboarding);
+    return attract1.ignoreEvents && attract2.ignoreEvents;
+  };
+
+  attract1.onClick(attractEnd);
+
+  attract2.onClick(attractEnd);
+
+  attract3.onClick(attractEnd);
+
+  attract4.onClick(attractEnd);
+
+  attract1_CTA.onClick(attractEnd);
+
+  attract2_CTA.onClick(attractEnd);
+
+  attract3_CTA.onClick(attractEnd);
+
+  attract4_CTA.onClick(attractEnd);
+
+  for (j = 0, len = quizArray.length; j < len; j++) {
+    button = quizArray[j];
+    button.parent = quizContainer;
+  }
+
+  for (k = 0, len1 = quizArrayP.length; k < len1; k++) {
+    button = quizArrayP[k];
+    button.parent = quizContainer;
+  }
+
+  quizArray.forEach(function(q, index) {
+    if (index >= 0 && index < 3) {
+      q.y = 150;
+    } else if (index >= 3 && index < 6) {
+      q.y = 400;
+    } else {
+      q.y = 650;
+    }
+    if (index === 0 || index === 3 || index === 6) {
+      return q.x = 200;
+    } else if (index === 1 || index === 4 || index === 7) {
+      return q.x = Align.center;
+    } else {
+      return q.x = 1220;
+    }
+  });
+
+  quizArrayP.forEach(function(q, index) {
+    q.visible = false;
+    q.html = "inactive";
+    if (index >= 0 && index < 3) {
+      q.y = 150;
+    } else if (index >= 3 && index < 6) {
+      q.y = 400;
+    } else {
+      q.y = 650;
+    }
+    if (index === 0 || index === 3 || index === 6) {
+      return q.x = 200;
+    } else if (index === 1 || index === 4 || index === 7) {
+      return q.x = Align.center;
+    } else {
+      return q.x = 1220;
+    }
+  });
+
+  progress = 1;
+
+  progressCheck = function(_p) {
+    if (_p === 1) {
+      progress2.stateSwitch('inactive');
+      progress3.stateSwitch('inactive');
+      return progress1.stateSwitch('active');
+    } else if (_p === 2) {
+      progress3.stateSwitch('inactive');
+      progress1.stateSwitch('inactive');
+      return progress2.stateSwitch('active');
+    } else if (_p === 3) {
+      progress2.stateSwitch('inactive');
+      progress1.stateSwitch('inactive');
+      return progress3.stateSwitch('active');
+    }
+  };
+
+  attachProgress = function(_progress) {
+    progressCheck(_progress);
+    return progressArray.forEach(function(p, index) {
+      currentLayer.addChild(p);
+      return p.y = 100 * (index + 1) + 250;
+    });
+  };
+
+  removeOnboarding = function() {
+    onboarding.visible = false;
+    flow.showOverlayCenter(quizContainer);
+    return attachProgress(progress, quizContainer);
+  };
+
+  onboarding.onClick(removeOnboarding);
+
+  overlay.onClick(removeOnboarding);
+
+  counter = 0;
+
+  nAware = 0;
+
+  nAdvocate = 0;
+
+  winner = '';
+
+  checkCounter = function() {
+    var a, l, len2;
+    counter = 0;
+    nAware = 0;
+    nAdvocate = 0;
+    winner = '';
+    for (l = 0, len2 = quizArrayP.length; l < len2; l++) {
+      a = quizArrayP[l];
+      if (a.html === " ") {
+        counter++;
+        if (a.name === 'awareness') {
+          nAware++;
+        }
+        if (a.name === 'advocate') {
+          nAdvocate++;
+        }
+      }
+    }
+    if (nAdvocate > nAware) {
+      return winner = quizRes_Advocate;
+    } else if (nAware > nAdvocate) {
+      return winner = quizRes_Awareness;
+    } else {
+      return winner = quizRes_Advocate;
+    }
+  };
+
+  for (l = 0, len2 = quizArray.length; l < len2; l++) {
+    q = quizArray[l];
+    q.onClick(function() {
+      var activeBtns, len3, m, match, results;
+      match = this.id + 1;
+      checkCounter();
+      if (counter >= 0) {
+        quiz_next.opacity = 1;
+        quiz_next.ignoreEvents = true;
+        quiz_next.onClick(function() {
+          checkCounter();
+          return deliverResults(winner);
+        });
+      }
+      if (counter < 3) {
+        results = [];
+        for (m = 0, len3 = quizArrayP.length; m < len3; m++) {
+          activeBtns = quizArrayP[m];
+          if (match === activeBtns.id) {
+            activeBtns.visible = true;
+            activeBtns.html = " ";
+            results.push(activeBtns.onClick(function() {
+              this.visible = false;
+              this.html = "inactive";
+              checkCounter();
+              if (counter === 0) {
+                quiz_next.ignoreEvents = true;
+                quiz_next.opacity = 0.2;
+              }
+              return checkCounter();
+            }));
+          } else {
+            results.push(void 0);
+          }
+        }
+        return results;
+      }
+    });
+  }
+
+  deliverResults = Utils.debounce(0.1, function(winner) {
+    var buttons, len3, len4, m, r;
+    print(winner);
+    quiz_skip.visible = false;
+    quiz_next.visible = false;
+    quiz_CTA.visible = false;
+    quizContainer.addChild(winner);
+    for (m = 0, len3 = quizArray.length; m < len3; m++) {
+      buttons = quizArray[m];
+      animateQuizBtns(buttons);
+    }
+    for (r = 0, len4 = quizArrayP.length; r < len4; r++) {
+      buttons = quizArrayP[r];
+      animateQuizBtns(buttons);
+    }
+    winner.addChild(exploreOther);
+    if (winner === quizRes_Advocate) {
+      winner.addChild(exploreAdvocate);
+    } else if (winner === quizRes_Awareness) {
+      winner.addChild(exploreAwareness);
+    }
+    return winner.animate({
+      y: winner.y - winner.height
+    });
+  });
+
+  animateQuizBtns = function(_buttons) {
+    _buttons.animate({
+      blur: 5,
+      y: _buttons.y - 330,
+      opacity: 0.12
+    });
+    return _buttons.ignoreEvents = true;
+  };
+
+  quiz_skip.onClick(function() {
+    flow.showOverlayCenter(home_imgs);
+    return currentLayer = home_imgs;
+  });
+
+  for (m = 0, len3 = homeOArray.length; m < len3; m++) {
+    o = homeOArray[m];
+    o.onMouseOver(function() {
+      return this.animate({
+        opacity: 0
+      });
+    });
+    o.onMouseOut(function() {
+      return this.animate({
+        opacity: 1
+      });
+    });
+  }
+
+  home_overlay1.onClick(function() {
+    flow.showOverlayLeft(advocatePreview);
+    currentLayer = advocatePreview;
+    return previewReset();
+  });
+
+  isOpen = false;
+
+  toolkitHandler = function(_isOpen) {
+    if (!_isOpen) {
+      currentLayer.addChild(toolkit_overlay);
+      toolkit_overlay.ignoreEvents = false;
+      toolkit.bringToFront();
+      window.__framerAnimation("#15f0fe9fa",toolkit_overlay.animate({
+        opacity: 1
+      }));
+      window.__framerAnimation("#c8dc607c",toolkit.animate({
+        x: 916
+      }));
+      return isOpen = true;
+    } else if (_isOpen) {
+      toolkit_overlay.removeChild(toolkit_overlay);
+      toolkit_overlay.ignoreEvents = true;
+      window.__framerAnimation("#e29d4ea2",toolkit_overlay.animate({
+        opacity: 0
+      }));
+      window.__framerAnimation("#14c69c524",toolkit.animate({
+        x: 1786
+      }));
+      return isOpen = false;
+    }
+  };
+
+  stateCounter = 0;
+
+  firstTime = true;
+
+  stateCheck = function(count) {
+    if (count === 0) {
+      toolkit.stateSwitch("blank");
+      return toolkit.addChild(browsingBtn);
+    } else if (count === 1) {
+      toolkit.stateSwitch("normal");
+      toolkit.addChild(petitionCheckbox);
+      toolkit.addChild(emailBtn);
+      nTools.text = 1;
+      nTools.x = 94;
+      if (firstTime) {
+        toolkitHandler(isOpen);
+        return Utils.delay(0.75, function() {
+          petitionCheckbox.addChild(checked);
+          window.__framerAnimation("#1512e8925",checked.animate({
+            opacity: 1,
+            scale: 1,
+            rotation: 360
+          }));
+          return Utils.delay(0.75, function() {
+            window.__framerAnimation("#b09ea540",emailBtn.animate({
+              opacity: 1,
+              time: 2
+            }));
+            return firstTime = false;
+          });
+        });
+      }
+    }
+  };
+
+  navAdvocate.onClick(function() {
+    flow.showOverlayCenter(advocatePreview);
+    currentLayer = advocatePreview;
+    return previewReset();
+  });
+
+  navAware.onClick(function() {
+    flow.showOverlayCenter(awarenessPreview);
+    currentLayer = awarenessPreview;
+    return previewReset();
+  });
+
+  navHome.onClick(function() {
+    flow.showOverlayCenter(home_imgs);
+    return currentLayer = home_imgs;
+  });
+
+  bothReset = function() {
+    stateCheck(stateCounter);
+    isOpen = false;
+    currentLayer.addChild(navBar);
+    progressArray.forEach(function(p, index) {
+      currentLayer.addChild(p);
+      return p.y = 100 * (index + 1) + 250;
+    });
+    if (currentLayer.name === 'advocate') {
+      navAware.opacity = 0;
+      navAdvocate.opacity = 1;
+    } else if (currentLayer.name === 'awareness') {
+      navAdvocate.opacity = 0;
+      navAware.opacity = 1;
+    }
+    progress = 2;
+    return progressCheck(progress);
+  };
+
+  previewReset = function() {
+    bothReset();
+    return currentLayer.addChild(toolkit);
+  };
+
+  detailReset = function() {
+    bothReset();
+    currentLayer.addChild(addBtn);
+    return currentLayer.addChild(toolkit);
+  };
+
+  exploreAdvocate.onClick(function() {
+    flow.showOverlayCenter(advocatePreview);
+    currentLayer = advocatePreview;
+    return previewReset();
+  });
+
+  exploreAwareness.onClick(function() {
+    flow.showOverlayCenter(awarenessPreview);
+    currentLayer = awarenessPreview;
+    return previewReset();
+  });
+
+  exploreOther.onClick(function() {
+    flow.showOverlayCenter(home_imgs);
+    return currentLayer = home_imgs;
+  });
+
+  toolkitBar.onClick(function() {
+    return toolkitHandler(isOpen);
+  });
+
+  browsingBtn.onClick(function() {
+    return toolkitHandler(isOpen);
+  });
+
+  toolkit_overlay.onClick(function() {
+    toolkitHandler(isOpen);
+    return keyboard.visible = false;
+  });
+
+  emailBtn.onClick(function() {
+    emailBtn.visible = false;
+    toolkit.addChild(emailContainer);
+    emailContainer.addChild(email_prompt);
+    progress = 3;
+    return progressCheck(progress);
+  });
+
+  cursorBlink = function(n) {
+    if (n === 0) {
+      cursor.opacity = 1;
+    }
+    if (n === 1) {
+      return cursor.opacity = 0;
+    }
+  };
+
+  email_prompt.onClick(function() {
+    progress = 3;
+    progressCheck(progress);
+    email_prompt.opacity = 0;
+    emailContainer.addChild(cursor);
+    toolkit.addChild(keyboard);
+    keyboard.visible = true;
+    window.__framerAnimation("#111afc49f",keyboard.animate({
+      y: 565
+    }));
+    keyboard.bringToFront();
+    return Utils.interval(0.5, function() {
+      return cursorBlink(cursor.opacity);
+    });
+  });
+
+  typeSpeed = .12;
+
+  type = function(textField, filler_text) {
+    var i, len4, letter, r, results, total, totalDelay, typeLetter;
+    filler_text = filler_text.split('');
+    totalDelay = 0;
+    counter = 0;
+    textField.html = '';
+    textField.style = {
+      color: '#333'
+    };
+    typeLetter = function(letter, delay) {
+      totalDelay += typeSpeed;
+      return Utils.delay(totalDelay, function() {
+        counter += 1;
+        textField.html += letter;
+        if (counter === filler_text.length) {
+          return Utils.delay(typeSpeed, function() {});
+        }
+      });
+    };
+    results = [];
+    for (i = r = 0, len4 = filler_text.length; r < len4; i = ++r) {
+      letter = filler_text[i];
+      typeLetter(letter, i);
+      results.push(total = i);
+    }
+    return results;
+  };
+
+  sendEmail.onClick(function() {
+    window.__framerAnimation("#df86d4ba",keyboard.animate({
+      y: 1080,
+      time: 0.8
+    }));
+    Utils.delay(0.2, function() {
+      toolkit_success.opacity = 0;
+      toolkit.addChild(toolkit_success);
+      window.__framerAnimation("#11cfa4fc1",toolkit_success.animate({
+        opacity: 1,
+        time: 0.5
+      }));
+      return nTools.text = 0;
+    });
+    return Utils.delay(6, function() {
+      if (isOpen) {
+        toolkitHandler(isOpen);
+      }
+      return Utils.delay(2, function() {
+        return window.location.reload();
+      });
+    });
+  });
+
+  sendEmail.ignoreEvents = true;
+
+  keyboard.onClick(function() {
+    emailContainer.addChild(fakeEmail);
+    type(fakeEmail, 'youremail@gmail.com');
+    Utils.interval(0.2, function() {
+      return cursorBlink(cursor.opacity);
+    });
+    window.__framerAnimation("#14dfbe03b",cursor.animate({
+      x: cursor.x + 323,
+      options: {
+        time: 2.1,
+        curve: Bezier.linear
+      }
+    }));
+    return Utils.delay(2.5, function() {
+      window.__framerAnimation("#1173872d8",sendEmail.animate({
+        opacity: 1
+      }));
+      return sendEmail.ignoreEvents = false;
+    });
+  });
+
+  petitionBtn.onClick(function() {
+    flow.showOverlayCenter(petition);
+    currentLayer = petition;
+    return detailReset();
+  });
+
+  officialsBtn.onClick(function() {
+    flow.showOverlayCenter(officials);
+    currentLayer = officials;
+    return detailReset();
+  });
+
+  rallyBtn.onClick(function() {
+    flow.showOverlayCenter(rally);
+    currentLayer = rally;
+    return detailReset();
+  });
+
+  socialmediaBtn.onClick(function() {
+    flow.showOverlayCenter(socialmedia);
+    currentLayer = socialmedia;
+    return detailReset();
+  });
+
+  addBtn.onClick(function() {
+    print(this.parent);
+    stateCounter++;
+    return stateCheck(stateCounter);
+  });
+
+}).call(this);
+})</script>
+
+	</head>
+	<body>
+	</body>
+</html>
