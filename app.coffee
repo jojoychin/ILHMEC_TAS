@@ -1,4 +1,5 @@
 require('FlowComponentCycle')
+require('myModule')
 
 # Define and set custom device
 Framer.Device.customize
@@ -467,6 +468,8 @@ sendEmail = new Layer
 	y: 18
 	opacity: 0.1
 	parent: emailContainer
+
+######~~~~~~~START OF ACTIVE SCRIPT~~~~~~~~~~######
 
 #ATTRACT LOOP
 currentLayer = overlay

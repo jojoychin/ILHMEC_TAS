@@ -54,8 +54,6 @@ quizContainer = new Layer
 	height: Screen.height
 	opacity: 0
 	
-
-
 quiz1 = new Layer
 	width: 499
 	height: 265
@@ -251,6 +249,7 @@ advocatePreview = new Layer
 	width: Screen.width
 	height: Screen.height
 	image: "images/AdvocatePreview.png"
+	name: 'advocate
 
 petitionBtn = new Layer
 	opacity: 0
@@ -272,7 +271,7 @@ petition = new Layer
 	width: Screen.width
 	height: Screen.height
 	image: "images/petition.png"
-	name: 'petition'
+	name: 'advocate'
 	
 #NAV
 
@@ -382,6 +381,7 @@ toolkitBar = new Layer
 
 nTools = new TextLayer
 	text: 0
+	fontSize: 40
 	textAlign: 'center'
 	parent: toolkit
 	x: 82
@@ -435,16 +435,17 @@ email_prompt = new Layer
 	x: 18
 
 cursor = new Layer
-	height: 37
+	height: 28
 	image: "images/cursor.png"
 	width: 2
 	x: 20
-	y: 19
+	y: 21
 
 fakeEmail = new Layer
 	width: 350
 	backgroundColor:'transparent'
 	fontFamily: 'Gotham'
+	fontSize: 36
 	y: 24
 	x: 34
 	height: 53
@@ -467,6 +468,8 @@ sendEmail = new Layer
 	y: 18
 	opacity: 0.1
 	parent: emailContainer
+
+######~~~~~~~START OF ACTIVE SCRIPT~~~~~~~~~~######
 
 #ATTRACT LOOP
 currentLayer = overlay
@@ -503,7 +506,8 @@ for button in quizArray
 
 for button in quizArrayP
 	button.parent = quizContainer
-	
+
+#positioning quiz elements (inactive)
 quizArray.forEach (q, index) ->
 	if index >= 0 && index < 3
 		q.y = 150
@@ -520,6 +524,7 @@ quizArray.forEach (q, index) ->
 	else
 		q.x = 1220
 
+#positioning quiz elements (active)
 quizArrayP.forEach (q, index) ->
 	q.visible = false
 	q.name = "inactive"
@@ -539,7 +544,9 @@ quizArrayP.forEach (q, index) ->
 	else
 		q.x = 1220
 
-progress = 1
+#check progress for what step the user is on
+progress = 1 #set as 1 to start
+#change state of progress bar
 progressCheck = ( _p )->
 	if _p == 1
 		progress2.stateSwitch('inactive')
@@ -553,15 +560,15 @@ progressCheck = ( _p )->
 		progress2.stateSwitch('inactive')
 		progress1.stateSwitch('inactive')
 		progress3.stateSwitch('active')
-	
 
+#adding and positioning progress bar to page
 attachProgress = ( _progress )->
 	progressCheck(_progress)
 	progressArray.forEach (p, index) ->
 		currentLayer.addChild(p)
 		p.y = 100 * (index + 1) + 250
 
-#TAP GOT IT
+#ONBOARDING -> click to say GOT IT, brings up quiz
 removeOnboarding = ->
 	onboarding.visible = false
 	flow.showOverlayCenter(quizContainer)
@@ -587,7 +594,6 @@ for q in quizArray
 			quiz_next.opacity = 1
 			quiz_next.onClick ->
 				deliverResults()
-# 		print counter
 		if counter < 3
 			for activeBtns in quizArrayP
 				if match == activeBtns.id
@@ -619,11 +625,12 @@ animateQuizBtns = (_buttons) ->
 		y: (_buttons.y - 330)
 		opacity: 0.12
 
+#skip to HOME
 quiz_skip.onClick ->
 	flow.showOverlayCenter(home_imgs)
 	currentLayer = home_imgs
 
-#Home animations
+#HOME animations
 for o in homeOArray
 	o.onMouseOver ->
 		this.animate
@@ -632,11 +639,13 @@ for o in homeOArray
 		this.animate
 			opacity: 1
 
+#Select ADVOCATE PREVIEW from HOME
 home_overlay1.onClick ->
 	flow.showOverlayLeft(advocatePreview)
 	currentLayer = advocatePreview
 	previewReset()
 
+#TOOLKIT HANDLER
 isOpen = false
 toolkitHandler = (_isOpen) ->
 	if !_isOpen
@@ -657,10 +666,10 @@ toolkitHandler = (_isOpen) ->
 			x: 1786
 		isOpen = false
 
-stateCounter = 0
 #function check toolkit state
-stateCheck = (count)->
-	print count
+stateCounter = 0
+firstTime = true
+stateCheck = (count) ->
 	if count == 0
 		toolkit.stateSwitch("blank")
 		toolkit.addChild(browsingBtn)
@@ -670,17 +679,19 @@ stateCheck = (count)->
 		toolkit.addChild(emailBtn)
 		nTools.text = 1
 		nTools.x = 90
-		toolkitHandler(isOpen)
-		Utils.delay 0.75, ->
-			petitionCheckbox.addChild(checked)
-			checked.animate
-				opacity: 1
-				scale: 1
-				rotation: 360
+		if firstTime
+			toolkitHandler(isOpen)
 			Utils.delay 0.75, ->
-				emailBtn.animate
+				petitionCheckbox.addChild(checked)
+				checked.animate
 					opacity: 1
-					time: 2
+					scale: 1
+					rotation: 360
+				Utils.delay 0.75, ->
+					emailBtn.animate
+						opacity: 1
+						time: 2
+					firstTime = false
 
 navAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
@@ -691,19 +702,27 @@ navHome.onClick ->
 	flow.showOverlayCenter(home_imgs)
 	currentLayer = home_imgs
 
-previewReset = ->
+#function for what to add when loading preview or detail pages
+bothReset = ->
 	stateCheck(stateCounter)
 	isOpen = false
 	currentLayer.addChild(navBar)
-	navBar.addChild(navAdvocate)
-	currentLayer.addChild(toolkit)
-	progress = 2
-	progressCheck(progress)
 	progressArray.forEach (p, index) ->
 		currentLayer.addChild(p)
 		p.y = 100 * (index + 1) + 250
-	if currentLayer.name == 'petition'
-		currentLayer.addChild(addBtn)
+	if currentLayer.name == 'advocate'
+		navBar.addChild(navAdvocate)
+	progress = 2
+	progressCheck(progress)
+	
+previewReset = ->
+	bothReset()
+	currentLayer.addChild(toolkit)
+
+detailReset = ->
+	bothReset()
+	currentLayer.addChild(addBtn)
+	currentLayer.addChild(toolkit)
 
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
@@ -723,8 +742,8 @@ browsingBtn.onClick ->
 	toolkitHandler(isOpen)
 
 toolkit_overlay.onClick ->
-	print toolkit_overlay.ignoreEvents
 	toolkitHandler(isOpen)
+	keyboard.visible = false
 
 emailBtn.onClick ->
 	emailBtn.visible = false
@@ -775,17 +794,17 @@ sendEmail.onClick ->
 	keyboard.animate
 		y: 1080
 		time: 0.8
-	Utils.delay 0.5, ->
+	Utils.delay 1, ->
+		toolkit_success.opacity = 0
 		toolkit.addChild(toolkit_success)
+		toolkit_success.animate
+			opacity: 1
 		nTools.text = 0
 		nTools.x = 85
-	Utils.delay 3.5, ->
+	Utils.delay 5, ->
 		if isOpen
 			toolkitHandler(isOpen)
 		Utils.delay 2, ->
-			restartText = new TextLayer
-				text: "Restarting experience"
-			
 			window.location.reload()
 
 sendEmail.ignoreEvents = true
@@ -796,9 +815,9 @@ keyboard.onClick ->
 	Utils.interval 0.2, ->
 		cursorBlink(cursor.opacity)
 	cursor.animate
-		x: (cursor.x + 292)
+		x: (cursor.x + 323)
 		options: 
-			time: 1.9
+			time: 2.1
 			curve: Bezier.linear
 # 	emailContainer.addChild(sendEmail)
 	Utils.delay 2.5, ->

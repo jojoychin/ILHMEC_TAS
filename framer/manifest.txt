@@ -1,13 +1,133 @@
+.git/COMMIT_EDITMSG
+.git/config
+.git/description
+.git/HEAD
+.git/hooks/applypatch-msg.sample
+.git/hooks/commit-msg.sample
+.git/hooks/post-update.sample
+.git/hooks/pre-applypatch.sample
+.git/hooks/pre-commit.sample
+.git/hooks/pre-push.sample
+.git/hooks/pre-rebase.sample
+.git/hooks/pre-receive.sample
+.git/hooks/prepare-commit-msg.sample
+.git/hooks/update.sample
+.git/index
+.git/info/exclude
+.git/logs/HEAD
+.git/logs/refs/heads/master
+.git/logs/refs/remotes/origin/master
+.git/objects/03/1c8528509e2a06c17cf807b8413ebe571def3c
+.git/objects/06/371b2e7a0193f4d830e0fbbdc705302cc07049
+.git/objects/06/bb1ea11b57f207c32a78abe367c0bc26f79d60
+.git/objects/0c/f03499620dd5c114fc2ab34fe6c878ff5f1eec
+.git/objects/0d/e560fe1cfc75b166e23f17912e3bd21f33416d
+.git/objects/0e/0814eca92f94df885bf4a2eeaf98309293bd6d
+.git/objects/0f/be66a1bbc5eb183e90cee849c35b8525802f2b
+.git/objects/15/c90e5a1460e6712ecffc3720640f30eba8f829
+.git/objects/16/eda17865fd93b996db6bf13b909a1604df7809
+.git/objects/1a/237a48c989b63396ed779fcafbd125ea46c9f2
+.git/objects/1b/149addf396f815961bbdadbcd3d3a802f36af5
+.git/objects/1c/eeb5e4351a9d173658e5dcdd516bcb086584cd
+.git/objects/21/b4041b53135754e258c937cce36ba6b63ff4ad
+.git/objects/22/64fd505ae330e1462cf9101abd0dae99031717
+.git/objects/23/0872dfa987efbe2d2d8b3c1bdfebc390678d7f
+.git/objects/23/c992a6fcf551becaf03132252dfa1d5e44add5
+.git/objects/28/9b22246a37a371edc21825e0637a3b89bc9ff9
+.git/objects/29/0ae4e8baa497a24d56ead89a63033912334760
+.git/objects/29/8e2fb20010a73548ae03a39e94f74d04e4a47e
+.git/objects/2b/0557c924f9434b328f92ba7a065250caaba8d7
+.git/objects/2d/ef5ee65ce3324edded23d2c1f23046e63bcc09
+.git/objects/30/149818413631ae5b5b8be335568875782c6251
+.git/objects/33/2cd18b08f90ae2e0ed1784c7c479273241b606
+.git/objects/34/a3f2de5e19b1357c06da5068dfdcc268153741
+.git/objects/35/dc16f1d420bce2ed881cdd7a117f623a7013bc
+.git/objects/37/aa93711bf69964e43b36ea63e93f20ea4ae293
+.git/objects/38/a5c42c3d387af76877c5f58309fd3ffe9e5ee3
+.git/objects/3e/ac85825a89854cb801881320f8674fa700568e
+.git/objects/40/db4521ba80a1cf462d0bc692daf8d1f84c17be
+.git/objects/43/746f59da00dedac910ad1dad9fb44df3e5dae5
+.git/objects/45/5a04efa394b5e33523b0c788db990903884b1c
+.git/objects/45/79adea871234e9b2b7c40c969e37eb94898e46
+.git/objects/49/4a7896d3d46d6890bcb212115b6dd828d0d6fc
+.git/objects/49/4e25eb879500c68f9cea4cfc1efcaed8aa228c
+.git/objects/4b/825dc642cb6eb9a060e54bf8d69288fbee4904
+.git/objects/4c/30670208e0ee2c6e6330996559e0e3152a0266
+.git/objects/5c/0bd65312e82f97cca5605240e728555a432297
+.git/objects/5c/e9116382e06d89828828e895200d1a956e8928
+.git/objects/62/f9457511f879886bb7728c986fe10b0ece6bcb
+.git/objects/66/b5832b1fe89de7b3ac7d287ae6b7c2781bff1f
+.git/objects/6c/6de4773800267077fe5b8d76502719c2e4ec68
+.git/objects/6d/cc4e874c0bfaba159cefe39cb541f54b093eec
+.git/objects/6e/ceae29134f6c61eb117b34646dfce3e3c515bd
+.git/objects/73/107b923b71220aad24e1cda5a521e7e633c7ac
+.git/objects/75/70bd1c826434002b28913c08e4b0d07043a7b1
+.git/objects/75/f91ffed97102678b54fcbdf20f67c3045e346f
+.git/objects/77/c5c04704810722eb208ab90c262a66fb4ed5e1
+.git/objects/82/7648100e65037d9e668927e4f2a34a0db75db2
+.git/objects/84/529d3744ffd53da1d0a1edd35b709c9a159ab6
+.git/objects/85/9cfda733629062baa68be6cb0acb29c26929eb
+.git/objects/8a/b28fc9276ecb8dbdea9dbe589ad5538411abef
+.git/objects/8d/8d05799d3dbb8c72dcb542b5751c9bbed8a9ad
+.git/objects/8f/62388fe40f6a9adb0a9ecd88a5ee1178121e06
+.git/objects/8f/9b797a5a126c9586c8463b06f6bafff5795848
+.git/objects/92/8804f17abb469bfe07054fb2d610e918c6f66d
+.git/objects/95/638164821b68e3a5ade897097540b3fb7523c8
+.git/objects/98/9701b6930ac93ea890506a4b52b60d188fab80
+.git/objects/9a/38cf9f662d3ab661419ed2a5332d4152a2c060
+.git/objects/9b/0bdf931663401c7924c91d4872a31f28a8bb74
+.git/objects/9c/4f99b22a56fb8c71bac4b077baf261ac8a175e
+.git/objects/a2/ecbaac536e6df434ac6b99967a6e1b9f893f47
+.git/objects/a3/349042d38d44aca7fd7e666676bf35ef28b010
+.git/objects/a3/ae7315264a6894cc3d0007169d1024124a7d26
+.git/objects/a4/7a91cbaf46e132beceec6238589761735e370d
+.git/objects/a5/03abe84373c8ef89431c7bb4bdf9644b67b10a
+.git/objects/ad/6916c7f8ee10faac929cbc355e146970c38ef5
+.git/objects/ad/f16b8c1871f884cdcf3a1f72e098358189f248
+.git/objects/bb/bd552d322cad9ff44f366b10657eaaeb865133
+.git/objects/bd/cb8746fe62538829814c5033f07804c07033bd
+.git/objects/be/b6b7f5c00beee8d4d04ffa5ee0d3988b4cf624
+.git/objects/c0/b28482565f5b9da130bccbe890eb266ee878e7
+.git/objects/c2/583f13dae45ae6b32eca45956d8c7d3a7bc6fb
+.git/objects/c2/e1142c16c55e2ea68341dc6351bc623fbccc0d
+.git/objects/c4/9a8f79b54e3c7c60d2d2c68028aa7930b4e14d
+.git/objects/ca/3285804adb174bbfde4263eb60e513fb83d5bb
+.git/objects/cc/2d55e4c9fc094999379db92cc98234adfc54c9
+.git/objects/cd/f5e00e06a5f989094dafe9583500be76526559
+.git/objects/cf/2260b7e1755c5a3008cc7a7a1916207d3900b3
+.git/objects/d3/d88714469f76b3f7e5f31b4df8effe8e735a6a
+.git/objects/d4/6c9f18f7a900d7b3924d0dfb6a8407b2fc4b01
+.git/objects/d4/eddb446491e8b12f9974a2f2d4ca66cbec20f9
+.git/objects/d4/f134167f142a380154622467ab7e777d20efd3
+.git/objects/d7/d167162c9c96d42c4cfb5374c72b26bef1ea72
+.git/objects/d9/1e47b40f1ede0bf7b0dacb43bfe5d26483d5cf
+.git/objects/db/9f480b24841ef589ac887176b38ac6360298f2
+.git/objects/dd/845606e0e6d5fc103a71615a81e2a77d5c0f6b
+.git/objects/df/d02ec07abea8b934bfc3da758edb191ba563c0
+.git/objects/e3/92ddc7d01cda83d6cf2434a63d858461ce9b7c
+.git/objects/e3/c4a107409d79d73ea887ab509a53b1404ceb13
+.git/objects/e5/9dac13ce502ec664f9ed87dcec0908713f18cb
+.git/objects/e5/bbca78710e17c19b8e1fade803c852bf36cb08
+.git/objects/e6/0ecc86c708ea55688780862ba254ee6de1c1d5
+.git/objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+.git/objects/e6/a0d976c652d3fee17b434f86a1ccf76c215a26
+.git/objects/ea/3c8f5635629d34c62a300dc16b0cdd6fe689ee
+.git/objects/ec/186b3cd4a87803943f018d60cae3295dcb3409
+.git/objects/ec/f2aeca57fb6d27401d1f9eff321d8de7d3c82b
+.git/objects/ed/d1c5b81858ea72e61649c96577ce6b19a4aab9
+.git/objects/f2/57f52150f7325b4a4fb4c764a271f81ec5d97b
+.git/objects/f2/88f459cb8f0f5e888f0697afbd2ae1eff358e9
+.git/objects/f3/c519885aacb0d91ecafc05ba8bb4aeeab9a960
+.git/objects/f5/e7f10ea9c1e280a3f80d6b9d06ba3bddce64cd
+.git/objects/fa/ef5fc640243fbb1486b8d5acacf75e8db42564
+.git/objects/fd/7488662ff5e1d6d7261bd1e80c6bcf5daaff7b
+.git/objects/fd/f5e952f2cfd3b96f85ccf245e7a0bcda788e06
+.git/objects/fe/f4d89a851a2082cd5287334842c25ea16e4bcd
+.git/refs/heads/master
+.git/refs/remotes/origin/master
 app.coffee
 fonts/GothaBol
 fonts/GothaBoo
-framer/backups/backup-2017-04-19 15.00.46.coffee
-framer/backups/backup-2017-04-19 15.02.46.coffee
-framer/backups/backup-2017-04-19 15.03.46.coffee
-framer/backups/backup-2017-04-19 15.05.46.coffee
-framer/backups/backup-2017-04-19 15.06.46.coffee
-framer/backups/backup-2017-04-19 15.07.46.coffee
-framer/backups/backup-2017-04-19 15.08.46.coffee
 framer/backups/backup-2017-04-19 15.09.46.coffee
 framer/backups/backup-2017-04-19 15.10.46.coffee
 framer/backups/backup-2017-04-19 15.12.46.coffee
@@ -22,6 +142,13 @@ framer/backups/backup-2017-04-19 15.43.49.coffee
 framer/backups/backup-2017-04-19 15.52.49.coffee
 framer/backups/backup-2017-04-19 15.57.49.coffee
 framer/backups/backup-2017-04-19 15.58.49.coffee
+framer/backups/backup-2017-04-20 09.30.25.coffee
+framer/backups/backup-2017-04-20 09.35.24.coffee
+framer/backups/backup-2017-04-20 09.36.24.coffee
+framer/backups/backup-2017-04-20 09.37.24.coffee
+framer/backups/backup-2017-04-20 09.38.24.coffee
+framer/backups/backup-2017-04-20 09.39.24.coffee
+framer/backups/backup-2017-04-20 09.40.24.coffee
 framer/coffee-script.js
 framer/config.json
 framer/framer.generated.js
@@ -100,4 +227,5 @@ images/toolkit_overlay.png
 images/toolkit_success.png
 index.html
 modules/FlowComponentCycle.coffee
+modules/layersModule.coffee
 modules/myModule.coffee
