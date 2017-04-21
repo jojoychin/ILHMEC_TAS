@@ -569,9 +569,9 @@ toolkitBar = new Layer
 nTools = new TextLayer
 	text: 0
 	fontSize: 20
-	textAlign: 'center'
+	textAlign: 'left'
 	parent: toolkit
-	x: 88
+	x: 89
 	y: 233
 	color: 'white'
 	fontFamily: 'Gotham'
@@ -948,32 +948,6 @@ toolkitHandler = (_isOpen) ->
 			x: 1786
 		isOpen = false
 
-moveLeft = new Animation
-	layer: toolkit
-	properties:
-		x: toolkit.x - 15
-		time: 0.06
-		curve: 'ease'
-
-moveRight = moveLeft.reverse()
-limit = 5
-timer = 0
-
-runShake = ->
-	# up the count
-	timer += 1
-	
-	moveLeft.onAnimationEnd ->
-		moveRight.start()
-	
-	# if the count is smaller then the limit run again
-	moveRight.onAnimationEnd ->
-		if timer < limit
-			runShake()
-			
-	moveLeft.start()
-
-
 #function check toolkit state
 stateCounter = 0
 firstTime = true
@@ -1019,11 +993,6 @@ stateCheck = (count) ->
 		temp.addChild(checked)
 		toolkit.addChild(emailBtn)
 		nTools.text = count
-		nTools.x = 94
-		limit = 5
-		timer = 0
-		runShake()
-			
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)
@@ -1248,12 +1217,30 @@ backBtn.onClick ->
 		currentLayer = awarenessPreview
 		previewReset()
 
+#shake function
+shakeIntensity = 5
+animA = toolkit.animate 
+	properties: {x: toolkit.x + shakeIntensity}
+	time: 0.05
+
+animB = toolkit.animate 
+	properties: {x: toolkit.x - shakeIntensity}
+	time: 0.05
+
 addBtn.onClick ->
-	print currentLayer.name + '_unchecked'
 	currentLayer.classList.add('added')
-	toolkitArray.push(currentLayer)
 	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
+	if stateCounter >= 2
+	#call shake functions on toolkit
+		animA.start()
+		animB.start()
+		animA.on Events.AnimationEnd, -> animB.start()
+		animB.on Events.AnimationEnd, -> animA.start()
+		# Option 1: Stop after n amount of seconds
+		Utils.delay 1, ->
+			animA.stop()
+			animB.stop()
 	addBtn.stateSwitch('inactive')
 	addBtn.ignoreEvents = true

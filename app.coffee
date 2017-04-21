@@ -569,9 +569,9 @@ toolkitBar = new Layer
 nTools = new TextLayer
 	text: 0
 	fontSize: 20
-	textAlign: 'center'
+	textAlign: 'left'
 	parent: toolkit
-	x: 88
+	x: 89
 	y: 233
 	color: 'white'
 	fontFamily: 'Gotham'
@@ -993,7 +993,7 @@ stateCheck = (count) ->
 		temp.addChild(checked)
 		toolkit.addChild(emailBtn)
 		nTools.text = count
-		nTools.x = 94
+		nTools.x = 92
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)
