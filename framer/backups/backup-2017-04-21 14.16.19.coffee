@@ -73,6 +73,7 @@ onboarding = new Layer
 	x: Align.center
 	y: Align.center
 	image: "images/onboarding.png"
+	scale: 0
 	
 quizContainer = new Layer
 	width: Screen.width
@@ -243,6 +244,8 @@ exploreAwareness = new Layer
 	width: 467
 	height: 77
 	opacity: 0
+	
+quizResArray = [quizRes_Advocate, quizRes_Awareness]
 
 #HOME
 
@@ -329,11 +332,17 @@ officialsBtn = new Layer
 	x: 707
 
 addBtn = new Layer
-	opacity: 0
-	x: 200
-	y: 637
-	width: 398
-	height: 124
+	height: 73
+	image: "images/addBtn.png"
+	width: 361
+	x: 221
+	y: 683
+
+addBtn.states = 
+	active:
+		image: "images/addBtn.png"
+	inactive:
+		image: "images/addBtn_added.png"
 
 #ADVOCATE DETAIL PAGES
 petition = new Layer
@@ -669,17 +678,36 @@ sendEmail = new Layer
 #ATTRACT LOOP
 currentLayer = overlay
 flow = new FlowComponent
-flow.showNext(home_imgs)
-# flow.showNext(attract1)
+# flow.showNext(home_imgs)
+flow.showNext(attract1)
 
 flow.layers = [ attract1, attract2, attract3, attract4 ]
-# flow.cycle( 6000 )
+flow.cycle( 6000 )
 
-cornerTransition = ->
+#custom flow transitions
+crossFade = (nav, layerA, layerB, overlay) ->
 	transition =
-		advocatePreview:
-			x: Align.center
-			y: Align.center
+		layerA:
+			show: {options: {time: 1}, opacity: 1}
+			hide: {options: {time: 1}, opacity: 0}
+		layerB:
+			show: {options: {time: 1}, opacity: 1}
+			hide: {options: {time: 1}, opacity: 0}
+		overlay:
+			show: {options: opacity: 0}
+			hide: {options: opacity: 0}
+
+crossFade2 = (nav, layerA, layerB, overlay) ->
+	transition =
+		layerA:
+			show: {options: {time: 0.2}, opacity: 1}
+			hide: {options: {time: 0.2}, opacity: 1}
+		layerB:
+			show: {options: {time: 0.2}, opacity: 1}
+			hide: {options: {time: 0.2}, opacity: 0}
+		overlay:
+			show: {options: opacity: 0}
+			hide: {options: opacity: 0}
 
 # function for ending Attract & transition to onboarding modal
 attractEnd = ->
@@ -688,8 +716,13 @@ attractEnd = ->
 	attract1_CTA.visible = false
 	attract3_CTA.visible = false
 	attract4_CTA.visible = false
-	flow.transition(overlay, crossFade)
+	flow.transition(overlay, crossFade2)
 	overlay.addChild(onboarding)
+	Utils.delay 1, ->
+		onboarding.animate
+			scale: 1
+			options: 
+				curve: "spring(300, 15, 0)"
 	attract1.ignoreEvents and attract2.ignoreEvents
 
 #TAP TO ENTER
@@ -870,18 +903,6 @@ for o in homeOArray
 		this.animate
 			opacity: 1
 
-crossFade = (nav, layerA, layerB, overlay) ->
-	transition =
-		layerA:
-			show: {options: {time: 1}, opacity: 1}
-			hide: {options: {time: 1}, opacity: 0}
-		layerB:
-			show: {options: {time: 1}, opacity: 1}
-			hide: {options: {time: 1}, opacity: 0}
-		overlay:
-			show: {options: opacity: 0}
-			hide: {options: opacity: 0}
-
 #Select ACTIOINS from HOME
 home_overlay1.onClick ->
 	flow.transition(advocatePreview, crossFade)
@@ -1035,32 +1056,39 @@ previewReset = ->
 detailReset = ->
 	bothReset()
 	currentLayer.addChild(backBtn)
-	if toolkitArray[0] != undefined
-		for t in toolkitArray
-			print t
-			if currentLayer == t
-				addBtn.ignoreEvents = true
-				print 'you have already added this tool'
-			else
-				currentLayer.addChild(addBtn)
-				addBtn.ignoreEvents = false
+	print 'this is the current layer: ' + currentLayer.name
+	if currentLayer.classList.contains('added')
+		currentLayer.addChild(addBtn)
+		addBtn.stateSwitch('inactive')
+		addBtn.ignoreEvents = true
+		print 'you have already added this tool'
 	else
 		currentLayer.addChild(addBtn)
+		addBtn.stateSwitch('active')
+		addBtn.ignoreEvents = false
+# 	else
+# 		currentLayer.addChild(addBtn)
 	currentLayer.addChild(toolkit)
 
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = advocatePreview
 	previewReset()
 
 exploreAwareness.onClick ->
 	flow.showOverlayCenter(awarenessPreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = awarenessPreview
 	previewReset()
 	
 exploreOther.onClick ->
 	flow.showOverlayBottom(home_imgs)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = home_imgs
 
 #toolkit click event
@@ -1193,9 +1221,10 @@ backBtn.onClick ->
 
 addBtn.onClick ->
 	print currentLayer.name + '_unchecked'
+	currentLayer.classList.add('added')
 	toolkitArray.push(currentLayer)
 	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
-	currentLayer.classList.contains('added')
+	addBtn.stateSwitch('inactive')
 	addBtn.ignoreEvents = true

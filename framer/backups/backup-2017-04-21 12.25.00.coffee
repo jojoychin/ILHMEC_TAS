@@ -244,6 +244,8 @@ exploreAwareness = new Layer
 	width: 467
 	height: 77
 	opacity: 0
+	
+quizResArray = [quizRes_Advocate, quizRes_Awareness]
 
 #HOME
 
@@ -330,11 +332,15 @@ officialsBtn = new Layer
 	x: 707
 
 addBtn = new Layer
-	opacity: 0
+	height: 73
+	image: "images/addBtn.png"
+	width: 361
 	x: 200
 	y: 637
-	width: 398
-	height: 124
+addBtn.states = 
+	active:
+		image: "images/addBtn.png"
+	inactive	
 
 #ADVOCATE DETAIL PAGES
 petition = new Layer
@@ -1064,16 +1070,22 @@ detailReset = ->
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = advocatePreview
 	previewReset()
 
 exploreAwareness.onClick ->
 	flow.showOverlayCenter(awarenessPreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = awarenessPreview
 	previewReset()
 	
 exploreOther.onClick ->
 	flow.showOverlayBottom(home_imgs)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = home_imgs
 
 #toolkit click event

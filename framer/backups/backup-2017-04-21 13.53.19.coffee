@@ -73,6 +73,7 @@ onboarding = new Layer
 	x: Align.center
 	y: Align.center
 	image: "images/onboarding.png"
+	scale: 0
 	
 quizContainer = new Layer
 	width: Screen.width
@@ -243,6 +244,8 @@ exploreAwareness = new Layer
 	width: 467
 	height: 77
 	opacity: 0
+	
+quizResArray = [quizRes_Advocate, quizRes_Awareness]
 
 #HOME
 
@@ -329,11 +332,17 @@ officialsBtn = new Layer
 	x: 707
 
 addBtn = new Layer
-	opacity: 0
-	x: 200
-	y: 637
-	width: 398
-	height: 124
+	height: 73
+	image: "images/addBtn.png"
+	width: 361
+	x: 221
+	y: 683
+
+addBtn.states = 
+	active:
+		image: "images/addBtn.png"
+	inactive:
+		image: "images/addBtn_added.png"
 
 #ADVOCATE DETAIL PAGES
 petition = new Layer
@@ -691,11 +700,11 @@ crossFade = (nav, layerA, layerB, overlay) ->
 crossFade2 = (nav, layerA, layerB, overlay) ->
 	transition =
 		layerA:
-			show: {options: {time: 1}, opacity: 1}
-			hide: {options: {time: 1}, opacity: 1}
+			show: {options: {time: 0.2}, opacity: 1}
+			hide: {options: {time: 0.2}, opacity: 1}
 		layerB:
-			show: {options: {time: 1}, opacity: 1}
-			hide: {options: {time: 1}, opacity: 0}
+			show: {options: {time: 0.2}, opacity: 1}
+			hide: {options: {time: 0.2}, opacity: 0}
 		overlay:
 			show: {options: opacity: 0}
 			hide: {options: opacity: 0}
@@ -709,6 +718,11 @@ attractEnd = ->
 	attract4_CTA.visible = false
 	flow.transition(overlay, crossFade2)
 	overlay.addChild(onboarding)
+	Utils.delay 1, ->
+		onboarding.animate
+			scale: 1
+			options: 
+				curve: "spring(300, 15, 0)"
 	attract1.ignoreEvents and attract2.ignoreEvents
 
 #TAP TO ENTER
@@ -1058,16 +1072,22 @@ detailReset = ->
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = advocatePreview
 	previewReset()
 
 exploreAwareness.onClick ->
 	flow.showOverlayCenter(awarenessPreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = awarenessPreview
 	previewReset()
 	
 exploreOther.onClick ->
 	flow.showOverlayBottom(home_imgs)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = home_imgs
 
 #toolkit click event

@@ -244,6 +244,8 @@ exploreAwareness = new Layer
 	width: 467
 	height: 77
 	opacity: 0
+	
+quizResArray = [quizRes_Advocate, quizRes_Awareness]
 
 #HOME
 
@@ -330,11 +332,17 @@ officialsBtn = new Layer
 	x: 707
 
 addBtn = new Layer
-	opacity: 0
-	x: 200
-	y: 637
-	width: 398
-	height: 124
+	height: 73
+	image: "images/addBtn.png"
+	width: 361
+	x: 221
+	y: 683
+
+addBtn.states = 
+	active:
+		image: "images/addBtn.png"
+	inactive:
+		image: "images/addBtn_added.png"
 
 #ADVOCATE DETAIL PAGES
 petition = new Layer
@@ -1052,10 +1060,12 @@ detailReset = ->
 		for t in toolkitArray
 			print t
 			if currentLayer == t
+				addBtn.stateSwitch('inactive')
 				addBtn.ignoreEvents = true
 				print 'you have already added this tool'
 			else
 				currentLayer.addChild(addBtn)
+				addBtn.stateSwitch('active')
 				addBtn.ignoreEvents = false
 	else
 		currentLayer.addChild(addBtn)
@@ -1071,11 +1081,15 @@ exploreAdvocate.onClick ->
 
 exploreAwareness.onClick ->
 	flow.showOverlayCenter(awarenessPreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = awarenessPreview
 	previewReset()
 	
 exploreOther.onClick ->
 	flow.showOverlayBottom(home_imgs)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = home_imgs
 
 #toolkit click event
@@ -1213,4 +1227,5 @@ addBtn.onClick ->
 	stateCounter++
 	stateCheck(stateCounter)
 	currentLayer.classList.contains('added')
+	addBtn.stateSwitch('inactive')
 	addBtn.ignoreEvents = true

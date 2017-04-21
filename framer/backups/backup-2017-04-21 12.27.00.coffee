@@ -244,6 +244,8 @@ exploreAwareness = new Layer
 	width: 467
 	height: 77
 	opacity: 0
+	
+quizResArray = [quizRes_Advocate, quizRes_Awareness]
 
 #HOME
 
@@ -330,11 +332,15 @@ officialsBtn = new Layer
 	x: 707
 
 addBtn = new Layer
-	opacity: 0
-	x: 200
-	y: 637
-	width: 398
-	height: 124
+	height: 73
+	image: "images/addBtn.png"
+	width: 361
+	x: 221
+	y: 683
+
+addBtn.states = 
+	active:
+		image: "images/addBtn.png"
 
 #ADVOCATE DETAIL PAGES
 petition = new Layer
@@ -710,11 +716,11 @@ attractEnd = ->
 	attract4_CTA.visible = false
 	flow.transition(overlay, crossFade2)
 	overlay.addChild(onboarding)
-	Utils.delay 0.5, ->
+	Utils.delay 1, ->
 		onboarding.animate
 			scale: 1
 			options: 
-				curve: Spring(500, 15, 20)
+				curve: "spring(300, 15, 0)"
 	attract1.ignoreEvents and attract2.ignoreEvents
 
 #TAP TO ENTER
@@ -1064,16 +1070,22 @@ detailReset = ->
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
 	flow.showOverlayCenter(advocatePreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = advocatePreview
 	previewReset()
 
 exploreAwareness.onClick ->
 	flow.showOverlayCenter(awarenessPreview)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = awarenessPreview
 	previewReset()
 	
 exploreOther.onClick ->
 	flow.showOverlayBottom(home_imgs)
+	for results in quizResArray
+		results.visible = false
 	currentLayer = home_imgs
 
 #toolkit click event
