@@ -255,7 +255,7 @@ home_imgs = new Layer
 	width: Screen.width
 
 home_overlay1 = new Layer
-	height: Screen.height / 2
+	height: (Screen.height / 2) + 3
 	image: "images/home_overlayquarter.png"
 	width: Screen.width / 2
 	parent: home_imgs
@@ -268,7 +268,7 @@ home_overlay2 = new Layer
 	parent: home_imgs
 
 home_overlay3 = new Layer
-	height: Screen.height / 2
+	height: (Screen.height / 2) + 3
 	image: "images/home_overlayquarter.png"
 	width: Screen.width / 2
 	y: Align.bottom
@@ -331,19 +331,18 @@ officialsBtn = new Layer
 	parent: advocatePreview
 	x: 707
 
-addBtnA = new Layer
+addBtn = new Layer
 	height: 73
 	image: "images/addBtn.png"
 	width: 361
+	x: 221
+	y: 683
 
-
-
-addBtn = new Layer
-	opacity: 0
-	x: 200
-	y: 637
-	width: 398
-	height: 124
+addBtn.states = 
+	active:
+		image: "images/addBtn.png"
+	inactive:
+		image: "images/addBtn_added.png"
 
 #ADVOCATE DETAIL PAGES
 petition = new Layer
@@ -372,8 +371,8 @@ awarenessPreview = new Layer
 
 rallyBtn = new Layer
 	opacity: 0
-	x: 118
-	y: 221
+	x: 1294
+	y: 215
 	width: 506
 	height: 571
 	parent: awarenessPreview
@@ -429,7 +428,7 @@ navAdvocate = new Layer
 	width: 337
 	height: 121
 	image: "images/navAdvocate.png"
-	x: 337
+	x: 336
 	parent: navBar
 	opacity: 0
 
@@ -440,7 +439,6 @@ navAware = new Layer
 	parent: navBar
 	opacity: 0
 	x: 1344
-	y: -1
 
 navGive = new Layer
 	width: 337
@@ -448,7 +446,7 @@ navGive = new Layer
 	image: "images/navGive.png"
 	parent: navBar
 	opacity: 0
-	x: 673
+	x: 672
 
 navParticipate = new Layer
 	height: 121
@@ -456,7 +454,7 @@ navParticipate = new Layer
 	width: 337
 	parent: navBar
 	opacity: 0
-	x: 1000
+	x: 1008
 
 progress1 = new Layer
 	width: 37
@@ -532,7 +530,7 @@ tool1 = new Layer
 tool2 = new Layer
 	backgroundColor: 'transparent'
 	x: 173
-	y: 330
+	y: 340
 	height: 45
 	width: 650
 	name: 'tool2'
@@ -541,7 +539,7 @@ tool2 = new Layer
 tool3 = new Layer
 	backgroundColor: 'transparent'
 	x: 173
-	y: 385
+	y: 395
 	height: 45
 	width: 650
 	name: 'tool3'
@@ -550,7 +548,7 @@ tool3 = new Layer
 tool4 = new Layer
 	backgroundColor: 'transparent'
 	x: 173
-	y: 430
+	y: 450
 	height: 45
 	width: 650
 	name: 'tool4'
@@ -608,6 +606,8 @@ checked = new Layer
 	image: "images/checked.png"
 	width: 37
 	opacity: 0
+	x: 2
+	y: 1
 	scale: 0
 
 browsingBtn = new Layer
@@ -921,7 +921,7 @@ home_overlay3.onClick ->
 	previewReset()
 
 home_overlay4.onClick ->
-	flow.transition(participatePreview, crossFade)
+	flow.transition(awarenessPreview, crossFade)
 	currentLayer = awarenessPreview
 	previewReset()
 
@@ -1057,17 +1057,14 @@ previewReset = ->
 detailReset = ->
 	bothReset()
 	currentLayer.addChild(backBtn)
-	if toolkitArray[0] != undefined
-		for t in toolkitArray
-			print t
-			if currentLayer == t
-				addBtn.ignoreEvents = true
-				print 'you have already added this tool'
-			else
-				currentLayer.addChild(addBtn)
-				addBtn.ignoreEvents = false
+	if currentLayer.classList.contains('added')
+		currentLayer.addChild(addBtn)
+		addBtn.stateSwitch('inactive')
+		addBtn.ignoreEvents = true
 	else
 		currentLayer.addChild(addBtn)
+		addBtn.stateSwitch('active')
+		addBtn.ignoreEvents = false
 	currentLayer.addChild(toolkit)
 
 #QUIZ RESULTS
@@ -1221,9 +1218,10 @@ backBtn.onClick ->
 
 addBtn.onClick ->
 	print currentLayer.name + '_unchecked'
+	currentLayer.classList.add('added')
 	toolkitArray.push(currentLayer)
 	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
-	currentLayer.classList.contains('added')
+	addBtn.stateSwitch('inactive')
 	addBtn.ignoreEvents = true

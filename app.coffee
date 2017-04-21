@@ -259,6 +259,7 @@ home_overlay1 = new Layer
 	image: "images/home_overlayquarter.png"
 	width: Screen.width / 2
 	parent: home_imgs
+	x: 1
 
 home_overlay2 = new Layer
 	height: Screen.height / 2
@@ -273,6 +274,7 @@ home_overlay3 = new Layer
 	width: Screen.width / 2
 	y: Align.bottom
 	parent: home_imgs
+	x: 1
 	
 home_overlay4 = new Layer
 	height: Screen.height / 2
@@ -428,7 +430,7 @@ navAdvocate = new Layer
 	width: 337
 	height: 121
 	image: "images/navAdvocate.png"
-	x: 337
+	x: 336
 	parent: navBar
 	opacity: 0
 
@@ -439,7 +441,6 @@ navAware = new Layer
 	parent: navBar
 	opacity: 0
 	x: 1344
-	y: -1
 
 navGive = new Layer
 	width: 337
@@ -447,7 +448,7 @@ navGive = new Layer
 	image: "images/navGive.png"
 	parent: navBar
 	opacity: 0
-	x: 673
+	x: 672
 
 navParticipate = new Layer
 	height: 121
@@ -607,6 +608,8 @@ checked = new Layer
 	image: "images/checked.png"
 	width: 37
 	opacity: 0
+	x: 2
+	y: 1
 	scale: 0
 
 browsingBtn = new Layer
@@ -920,7 +923,7 @@ home_overlay3.onClick ->
 	previewReset()
 
 home_overlay4.onClick ->
-	flow.transition(participatePreview, crossFade)
+	flow.transition(awarenessPreview, crossFade)
 	currentLayer = awarenessPreview
 	previewReset()
 
