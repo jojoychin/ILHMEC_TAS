@@ -252,45 +252,58 @@ home_imgs = new Layer
 	width: Screen.width
 
 home_overlay1 = new Layer
-	height: 540
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: 961
-	x: -0.5
+	width: Screen.width / 2
 	parent: home_imgs
 
 home_overlay2 = new Layer
-	height: 540
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: 961
+	width: Screen.width / 2
 	x: Align.right
 	parent: home_imgs
 
 home_overlay3 = new Layer
-	height: 540
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: 961
-	x: -0.5
-	y: 539
+	width: Screen.width / 2
+	y: Align.bottom
 	parent: home_imgs
 	
 home_overlay4 = new Layer
-	height: 540
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: 961
+	width: Screen.width / 2
 	x: Align.right
-	y: 539
+	y: Align.bottom
 	parent: home_imgs
 
 homeOArray = [home_overlay1, home_overlay2, home_overlay3, home_overlay4]
 
 home_text = new Layer
-	height: 672
-	image: "images/home_text.png"
+	height: 700
+	image: "images/home_text2.png"
 	width: 1537
 	parent: home_imgs
 	x: Align.center
 	y: Align.center
 
+#PREVIEW PAGES
+
+givePreview = new Layer
+	width: Screen.width
+	height: Screen.height
+	image: "images/givePreview.png"
+	name: 'give'
+givePreview.classList.add('give')
+
+participatePreview = new Layer
+	width: Screen.width
+	height: Screen.height
+	image: "images/givePreview.png"
+	name: 'participate'
+participatePreview.classList.add('participate')
 #ADVOCATE PREVIEW PAGE
 	
 advocatePreview = new Layer
@@ -425,13 +438,15 @@ navGive = new Layer
 	image: "images/navGive.png"
 	parent: navBar
 	opacity: 0
+	x: 673
 
-navPart = new Layer
-	width: 337
+navParticipate = new Layer
 	height: 121
 	image: "images/navPart.png"
+	width: 337
 	parent: navBar
 	opacity: 0
+	x: 1000
 
 progress1 = new Layer
 	width: 37
@@ -552,13 +567,6 @@ nTools = new TextLayer
 	fontFamily: 'Gotham'
 	fontStyle: 'bold'
 
-# petitionCheckbox = new Layer
-# 	height: 39
-# 	image: "images/tool1_unchecked.png"
-# 	width: 557
-# 	x: 173
-# 	y: 275
-
 officials_unchecked = new Layer
 	width: 655
 	height: 39
@@ -661,11 +669,11 @@ sendEmail = new Layer
 #ATTRACT LOOP
 currentLayer = overlay
 flow = new FlowComponent
-# flow.showNext(home_imgs)
-flow.showNext(attract1)
+flow.showNext(home_imgs)
+# flow.showNext(attract1)
 
 flow.layers = [ attract1, attract2, attract3, attract4 ]
-flow.cycle( 6000 )
+# flow.cycle( 6000 )
 
 cornerTransition = ->
 	transition =
@@ -862,10 +870,25 @@ for o in homeOArray
 		this.animate
 			opacity: 1
 
-#Select ADVOCATE PREVIEW from HOME
+#Select ACTIOINS from HOME
 home_overlay1.onClick ->
 	flow.showOverlayLeft(advocatePreview)
 	currentLayer = advocatePreview
+	previewReset()
+
+home_overlay2.onClick ->
+	flow.showOverlayLeft(givePreview)
+	currentLayer = givePreview
+	previewReset()
+
+home_overlay3.onClick ->
+	flow.showOverlayLeft(participatePreview)
+	currentLayer = participatePreview
+	previewReset()
+
+home_overlay4.onClick ->
+	flow.showOverlayLeft(awarenessPreview)
+	currentLayer = awarenessPreview
 	previewReset()
 
 #TOOLKIT HANDLER
@@ -946,6 +969,16 @@ navAware.onClick ->
 	currentLayer = awarenessPreview
 	previewReset()
 
+navGive.onClick ->
+	flow.showOverlayCenter(givePreview)
+	currentLayer = givePreview
+	previewReset()
+
+navParticipate.onClick ->
+	flow.showOverlayCenter(awarenessPreview)
+	currentLayer = awarenessPreview
+	previewReset()
+
 navHome.onClick ->
 	flow.showOverlayCenter(home_imgs)
 	currentLayer = home_imgs
@@ -962,10 +995,24 @@ bothReset = ->
 		p.y = 100 * (index + 1) + 250
 	if currentLayer.classList.contains('advocate')
 		navAware.opacity = 0
+		navParticipate.opacity = 0
+		navGive.opacity = 0
 		navAdvocate.opacity = 1
 	else if currentLayer.classList.contains('awareness')
 		navAdvocate.opacity = 0
+		navParticipate.opacity = 0
+		navGive.opacity = 0
 		navAware.opacity = 1
+	else if currentLayer.classList.contains('give')
+		navAdvocate.opacity = 0
+		navAware.opacity = 0
+		navParticipate.opacity = 0
+		navGive.opacity = 1
+	else if currentLayer.classList.contains('participate')
+		navAware.opacity = 0
+		navAdvocate.opacity = 0
+		navGive.opacity = 0
+		navParticipate.opacity = 1
 	progress = 2
 	progressCheck(progress)
 	
@@ -976,7 +1023,17 @@ previewReset = ->
 detailReset = ->
 	bothReset()
 	currentLayer.addChild(backBtn)
-	currentLayer.addChild(addBtn)
+	if toolkitArray[0] != undefined
+		for t in toolkitArray
+			print t
+			if currentLayer == t
+				addBtn.ignoreEvents = true
+				print 'you have already added this tool'
+			else
+				currentLayer.addChild(addBtn)
+				addBtn.ignoreEvents = false
+	else
+		currentLayer.addChild(addBtn)
 	currentLayer.addChild(toolkit)
 
 #QUIZ RESULTS
@@ -1112,7 +1169,7 @@ socialmediaBtn.onClick ->
 
 #DETAIL PAGE
 backBtn.onClick ->
-	print currentLayer
+# 	print currentLayer
 	if currentLayer.classList.contains('advocate')
 		flow.showOverlayCenter(advocatePreview)
 		currentLayer = advocatePreview
@@ -1129,4 +1186,4 @@ addBtn.onClick ->
 	stateCounter++
 	stateCheck(stateCounter)
 	currentLayer.classList.contains('added')
-	addBtn.destroy()
+	addBtn.ignoreEvents = true

@@ -252,7 +252,7 @@ home_imgs = new Layer
 	width: Screen.width
 
 home_overlay1 = new Layer
-	height: 540
+	height: (Screen.height / 2
 	image: "images/home_overlayquarter.png"
 	width: 961
 	x: -0.5
@@ -284,13 +284,28 @@ home_overlay4 = new Layer
 homeOArray = [home_overlay1, home_overlay2, home_overlay3, home_overlay4]
 
 home_text = new Layer
-	height: 672
+	height: 700
 	image: "images/home_text.png"
 	width: 1537
 	parent: home_imgs
 	x: Align.center
 	y: Align.center
 
+#PREVIEW PAGES
+
+givePreview = new Layer
+	width: Screen.width
+	height: Screen.height
+	image: "images/givePreview.png"
+	name: 'give'
+givePreview.classList.add('give')
+
+participatePreview = new Layer
+	width: Screen.width
+	height: Screen.height
+	image: "images/givePreview.png"
+	name: 'give'
+givePreview.classList.add('participate')
 #ADVOCATE PREVIEW PAGE
 	
 advocatePreview = new Layer
@@ -426,7 +441,7 @@ navGive = new Layer
 	parent: navBar
 	opacity: 0
 
-navPart = new Layer
+navParticipate = new Layer
 	width: 337
 	height: 121
 	image: "images/navPart.png"
@@ -552,13 +567,6 @@ nTools = new TextLayer
 	fontFamily: 'Gotham'
 	fontStyle: 'bold'
 
-# petitionCheckbox = new Layer
-# 	height: 39
-# 	image: "images/tool1_unchecked.png"
-# 	width: 557
-# 	x: 173
-# 	y: 275
-
 officials_unchecked = new Layer
 	width: 655
 	height: 39
@@ -661,11 +669,11 @@ sendEmail = new Layer
 #ATTRACT LOOP
 currentLayer = overlay
 flow = new FlowComponent
-# flow.showNext(home_imgs)
-flow.showNext(attract1)
+flow.showNext(home_imgs)
+# flow.showNext(attract1)
 
 flow.layers = [ attract1, attract2, attract3, attract4 ]
-flow.cycle( 6000 )
+# flow.cycle( 6000 )
 
 cornerTransition = ->
 	transition =
@@ -976,7 +984,17 @@ previewReset = ->
 detailReset = ->
 	bothReset()
 	currentLayer.addChild(backBtn)
-	currentLayer.addChild(addBtn)
+	if toolkitArray[0] != undefined
+		for t in toolkitArray
+			print t
+			if currentLayer == t
+				addBtn.ignoreEvents = true
+				print 'you have already added this tool'
+			else
+				currentLayer.addChild(addBtn)
+				addBtn.ignoreEvents = false
+	else
+		currentLayer.addChild(addBtn)
 	currentLayer.addChild(toolkit)
 
 #QUIZ RESULTS
@@ -1112,7 +1130,7 @@ socialmediaBtn.onClick ->
 
 #DETAIL PAGE
 backBtn.onClick ->
-	print currentLayer
+# 	print currentLayer
 	if currentLayer.classList.contains('advocate')
 		flow.showOverlayCenter(advocatePreview)
 		currentLayer = advocatePreview
@@ -1129,3 +1147,4 @@ addBtn.onClick ->
 	stateCounter++
 	stateCheck(stateCounter)
 	currentLayer.classList.contains('added')
+	addBtn.ignoreEvents = true
