@@ -948,6 +948,16 @@ toolkitHandler = (_isOpen) ->
 			x: 1786
 		isOpen = false
 
+shakeIntensity = 4
+
+animA = toolkit.animate 
+	properties: {x: toolkit.x + shakeIntensity}
+	time: 0.1
+
+animB = toolkit.animate 
+	properties: {x: toolkit.x - shakeIntensity}
+	time: 0.1
+
 #function check toolkit state
 stateCounter = 0
 firstTime = true
@@ -994,6 +1004,17 @@ stateCheck = (count) ->
 		toolkit.addChild(emailBtn)
 		nTools.text = count
 		nTools.x = 94
+		animA.start()
+		animB.start()
+
+		animA.on Events.AnimationEnd, -> animB.start()
+		animB.on Events.AnimationEnd, -> animA.start()
+
+		# Option 1: Stop after n amount of seconds
+		Utils.delay 1, ->
+			animA.stop()
+			animB.stop()
+
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)

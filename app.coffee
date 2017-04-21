@@ -1218,12 +1218,30 @@ backBtn.onClick ->
 		currentLayer = awarenessPreview
 		previewReset()
 
+#shake function
+shakeIntensity = 5
+animA = toolkit.animate 
+	properties: {x: toolkit.x + shakeIntensity}
+	time: 0.05
+
+animB = toolkit.animate 
+	properties: {x: toolkit.x - shakeIntensity}
+	time: 0.05
+
 addBtn.onClick ->
-	print currentLayer.name + '_unchecked'
 	currentLayer.classList.add('added')
-	toolkitArray.push(currentLayer)
 	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
+	if stateCounter >= 2
+	#call shake functions on toolkit
+		animA.start()
+		animB.start()
+		animA.on Events.AnimationEnd, -> animB.start()
+		animB.on Events.AnimationEnd, -> animA.start()
+		# Option 1: Stop after n amount of seconds
+		Utils.delay 1, ->
+			animA.stop()
+			animB.stop()
 	addBtn.stateSwitch('inactive')
 	addBtn.ignoreEvents = true

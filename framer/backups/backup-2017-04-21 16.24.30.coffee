@@ -948,6 +948,33 @@ toolkitHandler = (_isOpen) ->
 			x: 1786
 		isOpen = false
 
+# moveLeft = new Animation
+# 	layer: toolkit
+# 	properties:
+# 		x: toolkit.x - 5
+# 		y: toolkit.y - 15
+# 		time: 0.01
+# 		curve: Bezier.ease
+# 
+# moveRight = moveLeft.reverse()
+# limit = 3
+# timer = 0
+# 
+# runShake = ->
+# 	# up the count
+# 	timer += 1
+# 	
+# 	moveLeft.onAnimationEnd ->
+# 		moveRight.start()
+# 	
+# 	# if the count is smaller then the limit run again
+# 	moveRight.onAnimationEnd ->
+# 		if timer < limit
+# 			runShake()
+# 			
+# 	moveLeft.start()
+
+
 #function check toolkit state
 stateCounter = 0
 firstTime = true
@@ -994,6 +1021,16 @@ stateCheck = (count) ->
 		toolkit.addChild(emailBtn)
 		nTools.text = count
 		nTools.x = 94
+# 		limit = 5
+# 		timer = 0
+# 		runShake()
+		toolkit.animate
+			x: toolkit.x - 10
+			curve: 'spring(300, 30, 0)'
+			time: 0.05
+			repeat: 5
+			
+			
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)

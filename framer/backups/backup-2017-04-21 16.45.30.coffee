@@ -259,6 +259,7 @@ home_overlay1 = new Layer
 	image: "images/home_overlayquarter.png"
 	width: Screen.width / 2
 	parent: home_imgs
+	x: 1
 
 home_overlay2 = new Layer
 	height: Screen.height / 2
@@ -273,6 +274,7 @@ home_overlay3 = new Layer
 	width: Screen.width / 2
 	y: Align.bottom
 	parent: home_imgs
+	x: 1
 	
 home_overlay4 = new Layer
 	height: Screen.height / 2
@@ -428,7 +430,7 @@ navAdvocate = new Layer
 	width: 337
 	height: 121
 	image: "images/navAdvocate.png"
-	x: 337
+	x: 336
 	parent: navBar
 	opacity: 0
 
@@ -439,7 +441,6 @@ navAware = new Layer
 	parent: navBar
 	opacity: 0
 	x: 1344
-	y: -1
 
 navGive = new Layer
 	width: 337
@@ -447,7 +448,7 @@ navGive = new Layer
 	image: "images/navGive.png"
 	parent: navBar
 	opacity: 0
-	x: 673
+	x: 672
 
 navParticipate = new Layer
 	height: 121
@@ -1217,12 +1218,30 @@ backBtn.onClick ->
 		currentLayer = awarenessPreview
 		previewReset()
 
+#shake function
+shakeIntensity = 5
+animA = toolkit.animate 
+	properties: {x: toolkit.x + shakeIntensity}
+	time: 0.05
+
+animB = toolkit.animate 
+	properties: {x: toolkit.x - shakeIntensity}
+	time: 0.05
+
 addBtn.onClick ->
-	print currentLayer.name + '_unchecked'
 	currentLayer.classList.add('added')
-	toolkitArray.push(currentLayer)
 	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
+	if stateCounter >= 2
+	#call shake functions on toolkit
+		animA.start()
+		animB.start()
+		animA.on Events.AnimationEnd, -> animB.start()
+		animB.on Events.AnimationEnd, -> animA.start()
+		# Option 1: Stop after n amount of seconds
+		Utils.delay 1, ->
+			animA.stop()
+			animB.stop()
 	addBtn.stateSwitch('inactive')
 	addBtn.ignoreEvents = true

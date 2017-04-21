@@ -255,7 +255,7 @@ home_imgs = new Layer
 	width: Screen.width
 
 home_overlay1 = new Layer
-	height: (Screen.height / 2) + 1
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
 	width: Screen.width / 2
 	parent: home_imgs
@@ -269,7 +269,7 @@ home_overlay2 = new Layer
 	parent: home_imgs
 
 home_overlay3 = new Layer
-	height: (Screen.height / 2) + 1
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
 	width: Screen.width / 2
 	y: Align.bottom
@@ -948,6 +948,32 @@ toolkitHandler = (_isOpen) ->
 			x: 1786
 		isOpen = false
 
+moveLeft = new Animation
+	layer: toolkit
+	properties:
+		x: toolkit.x - 10
+		curve: 'spring(500, 10, 10)'
+		time: 0.05
+
+moveRight = moveLeft.reverse()
+limit = 4
+timer = 0
+
+runShake = ->
+	# up the count
+	timer += 1
+	
+	moveLeft.onAnimationEnd ->
+		moveRight.start()
+	
+	# if the count is smaller then the limit run again
+	moveRight.onAnimationEnd ->
+		if timer < limit
+			runShake()
+			
+	moveLeft.start()
+
+
 #function check toolkit state
 stateCounter = 0
 firstTime = true
@@ -994,6 +1020,11 @@ stateCheck = (count) ->
 		toolkit.addChild(emailBtn)
 		nTools.text = count
 		nTools.x = 94
+		limit = 4
+		timer = 0
+		toolkit.centerY()
+		runShake()
+
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)

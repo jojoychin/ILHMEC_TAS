@@ -259,6 +259,7 @@ home_overlay1 = new Layer
 	image: "images/home_overlayquarter.png"
 	width: Screen.width / 2
 	parent: home_imgs
+	x: 1
 
 home_overlay2 = new Layer
 	height: Screen.height / 2
@@ -273,6 +274,7 @@ home_overlay3 = new Layer
 	width: Screen.width / 2
 	y: Align.bottom
 	parent: home_imgs
+	x: 1
 	
 home_overlay4 = new Layer
 	height: Screen.height / 2
@@ -428,7 +430,7 @@ navAdvocate = new Layer
 	width: 337
 	height: 121
 	image: "images/navAdvocate.png"
-	x: 337
+	x: 336
 	parent: navBar
 	opacity: 0
 
@@ -439,7 +441,6 @@ navAware = new Layer
 	parent: navBar
 	opacity: 0
 	x: 1344
-	y: -1
 
 navGive = new Layer
 	width: 337
@@ -447,7 +448,7 @@ navGive = new Layer
 	image: "images/navGive.png"
 	parent: navBar
 	opacity: 0
-	x: 673
+	x: 672
 
 navParticipate = new Layer
 	height: 121
@@ -608,7 +609,7 @@ checked = new Layer
 	width: 37
 	opacity: 0
 	x: 2
-	y: 
+	y: 1
 	scale: 0
 
 browsingBtn = new Layer
@@ -947,6 +948,33 @@ toolkitHandler = (_isOpen) ->
 			x: 1786
 		isOpen = false
 
+# moveLeft = new Animation
+# 	layer: toolkit
+# 	properties:
+# 		x: toolkit.x - 5
+# 		y: toolkit.y - 15
+# 		time: 0.01
+# 		curve: Bezier.ease
+# 
+# moveRight = moveLeft.reverse()
+# limit = 3
+# timer = 0
+# 
+# runShake = ->
+# 	# up the count
+# 	timer += 1
+# 	
+# 	moveLeft.onAnimationEnd ->
+# 		moveRight.start()
+# 	
+# 	# if the count is smaller then the limit run again
+# 	moveRight.onAnimationEnd ->
+# 		if timer < limit
+# 			runShake()
+# 			
+# 	moveLeft.start()
+
+
 #function check toolkit state
 stateCounter = 0
 firstTime = true
@@ -993,6 +1021,13 @@ stateCheck = (count) ->
 		toolkit.addChild(emailBtn)
 		nTools.text = count
 		nTools.x = 94
+# 		limit = 5
+# 		timer = 0
+# 		runShake()
+		toolkit.animate
+			x: too
+			curve: 'spring(300, 30, 0)'
+			
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)

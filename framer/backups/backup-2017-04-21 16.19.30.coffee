@@ -259,6 +259,7 @@ home_overlay1 = new Layer
 	image: "images/home_overlayquarter.png"
 	width: Screen.width / 2
 	parent: home_imgs
+	x: 1
 
 home_overlay2 = new Layer
 	height: Screen.height / 2
@@ -273,6 +274,7 @@ home_overlay3 = new Layer
 	width: Screen.width / 2
 	y: Align.bottom
 	parent: home_imgs
+	x: 1
 	
 home_overlay4 = new Layer
 	height: Screen.height / 2
@@ -371,8 +373,8 @@ awarenessPreview = new Layer
 
 rallyBtn = new Layer
 	opacity: 0
-	x: 118
-	y: 221
+	x: 1294
+	y: 215
 	width: 506
 	height: 571
 	parent: awarenessPreview
@@ -428,7 +430,7 @@ navAdvocate = new Layer
 	width: 337
 	height: 121
 	image: "images/navAdvocate.png"
-	x: 337
+	x: 336
 	parent: navBar
 	opacity: 0
 
@@ -439,7 +441,6 @@ navAware = new Layer
 	parent: navBar
 	opacity: 0
 	x: 1344
-	y: -1
 
 navGive = new Layer
 	width: 337
@@ -447,7 +448,7 @@ navGive = new Layer
 	image: "images/navGive.png"
 	parent: navBar
 	opacity: 0
-	x: 673
+	x: 672
 
 navParticipate = new Layer
 	height: 121
@@ -455,7 +456,7 @@ navParticipate = new Layer
 	width: 337
 	parent: navBar
 	opacity: 0
-	x: 1000
+	x: 1008
 
 progress1 = new Layer
 	width: 37
@@ -531,7 +532,7 @@ tool1 = new Layer
 tool2 = new Layer
 	backgroundColor: 'transparent'
 	x: 173
-	y: 330
+	y: 340
 	height: 45
 	width: 650
 	name: 'tool2'
@@ -540,7 +541,7 @@ tool2 = new Layer
 tool3 = new Layer
 	backgroundColor: 'transparent'
 	x: 173
-	y: 385
+	y: 395
 	height: 45
 	width: 650
 	name: 'tool3'
@@ -549,7 +550,7 @@ tool3 = new Layer
 tool4 = new Layer
 	backgroundColor: 'transparent'
 	x: 173
-	y: 430
+	y: 450
 	height: 45
 	width: 650
 	name: 'tool4'
@@ -607,6 +608,8 @@ checked = new Layer
 	image: "images/checked.png"
 	width: 37
 	opacity: 0
+	x: 2
+	y: 1
 	scale: 0
 
 browsingBtn = new Layer
@@ -920,7 +923,7 @@ home_overlay3.onClick ->
 	previewReset()
 
 home_overlay4.onClick ->
-	flow.transition(participatePreview, crossFade)
+	flow.transition(awarenessPreview, crossFade)
 	currentLayer = awarenessPreview
 	previewReset()
 
@@ -944,6 +947,34 @@ toolkitHandler = (_isOpen) ->
 		toolkit.animate
 			x: 1786
 		isOpen = false
+
+moveLeft = new Animation
+	layer: toolkit
+	properties:
+		x: toolkit.x - 5
+		y: toolkit.y - 15
+		options:
+			time: 0.01
+			curve: 'spring(500, 10 )'
+
+moveRight = moveLeft.reverse()
+limit = 3
+timer = 0
+
+runShake = ->
+	# up the count
+	timer += 1
+	
+	moveLeft.onAnimationEnd ->
+		moveRight.start()
+	
+	# if the count is smaller then the limit run again
+	moveRight.onAnimationEnd ->
+		if timer < limit
+			runShake()
+			
+	moveLeft.start()
+
 
 #function check toolkit state
 stateCounter = 0
@@ -991,6 +1022,10 @@ stateCheck = (count) ->
 		toolkit.addChild(emailBtn)
 		nTools.text = count
 		nTools.x = 94
+		limit = 5
+		timer = 0
+		runShake()
+			
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)
@@ -1056,18 +1091,14 @@ previewReset = ->
 detailReset = ->
 	bothReset()
 	currentLayer.addChild(backBtn)
-	print 'this is the current layer: ' + currentLayer.name
 	if currentLayer.classList.contains('added')
-		print currentLayer + ' has added'
+		currentLayer.addChild(addBtn)
 		addBtn.stateSwitch('inactive')
 		addBtn.ignoreEvents = true
-		print 'you have already added this tool'
 	else
 		currentLayer.addChild(addBtn)
 		addBtn.stateSwitch('active')
 		addBtn.ignoreEvents = false
-# 	else
-# 		currentLayer.addChild(addBtn)
 	currentLayer.addChild(toolkit)
 
 #QUIZ RESULTS
@@ -1221,10 +1252,10 @@ backBtn.onClick ->
 
 addBtn.onClick ->
 	print currentLayer.name + '_unchecked'
+	currentLayer.classList.add('added')
 	toolkitArray.push(currentLayer)
 	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
-	currentLayer.classList.contains('added')
 	addBtn.stateSwitch('inactive')
 	addBtn.ignoreEvents = true
