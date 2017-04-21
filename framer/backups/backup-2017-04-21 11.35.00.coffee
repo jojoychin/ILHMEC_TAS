@@ -446,7 +446,7 @@ navParticipate = new Layer
 	width: 337
 	parent: navBar
 	opacity: 0
-	x: 992
+	x: 1000
 
 progress1 = new Layer
 	width: 37
@@ -688,7 +688,7 @@ attractEnd = ->
 	attract1_CTA.visible = false
 	attract3_CTA.visible = false
 	attract4_CTA.visible = false
-	flow.showOverlayCenter(overlay)
+	flow.transition(overlay, crossFade)
 	overlay.addChild(onboarding)
 	attract1.ignoreEvents and attract2.ignoreEvents
 
@@ -858,7 +858,7 @@ animateQuizBtns = (_buttons) ->
 
 #skip to HOME
 quiz_skip.onClick ->
-	flow.showOverlayCenter(home_imgs)
+	flow.showOverlayBottom(home_imgs)
 	currentLayer = home_imgs
 
 #HOME animations
@@ -870,24 +870,36 @@ for o in homeOArray
 		this.animate
 			opacity: 1
 
+crossFade = (nav, layerA, layerB, overlay) ->
+	transition =
+		layerA:
+			show: {options: {time: 1}, opacity: 1}
+			hide: {options: {time: 1}, opacity: 0}
+		layerB:
+			show: {options: {time: 1}, opacity: 1}
+			hide: {options: {time: 1}, opacity: 0}
+		overlay:
+			show: {options: opacity: 0}
+			hide: {options: opacity: 0}
+
 #Select ACTIOINS from HOME
 home_overlay1.onClick ->
-	flow.showOverlayLeft(advocatePreview)
+	flow.transition(advocatePreview, crossFade)
 	currentLayer = advocatePreview
 	previewReset()
 
 home_overlay2.onClick ->
-	flow.showOverlayLeft(givePreview)
+	flow.transition(givePreview, crossFade)
 	currentLayer = givePreview
 	previewReset()
 
 home_overlay3.onClick ->
-	flow.showOverlayLeft(participatePreview)
+	flow.transition(participatePreview, crossFade)
 	currentLayer = participatePreview
 	previewReset()
 
 home_overlay4.onClick ->
-	flow.showOverlayLeft(awarenessPreview)
+	flow.transition(participatePreview, crossFade)
 	currentLayer = awarenessPreview
 	previewReset()
 
@@ -960,17 +972,27 @@ stateCheck = (count) ->
 		nTools.x = 94
 		
 navAdvocate.onClick ->
-	flow.showOverlayCenter(advocatePreview)
+	flow.transition(advocatePreview, crossFade)
 	currentLayer = advocatePreview
 	previewReset()
 
 navAware.onClick ->
-	flow.showOverlayCenter(awarenessPreview)
+	flow.transition(awarenessPreview, crossFade)
 	currentLayer = awarenessPreview
 	previewReset()
 
+navGive.onClick ->
+	flow.transition(givePreview, crossFade)
+	currentLayer = givePreview
+	previewReset()
+
+navParticipate.onClick ->
+	flow.transition(participatePreview, crossFade)
+	currentLayer = participatePreview
+	previewReset()
+
 navHome.onClick ->
-	flow.showOverlayCenter(home_imgs)
+	flow.showOverlayBottom(home_imgs)
 	currentLayer = home_imgs
 
 toolkitArray = []
@@ -1038,7 +1060,7 @@ exploreAwareness.onClick ->
 	previewReset()
 	
 exploreOther.onClick ->
-	flow.showOverlayCenter(home_imgs)
+	flow.showOverlayBottom(home_imgs)
 	currentLayer = home_imgs
 
 #toolkit click event
@@ -1137,23 +1159,23 @@ keyboard.onClick ->
 
 #FROM ADVOCATE PREVIEW PAGE
 petitionBtn.onClick ->
-	flow.showOverlayCenter(petition)
+	flow.transition(petition, crossFade)
 	currentLayer = petition
 	detailReset()
 
 officialsBtn.onClick ->
-	flow.showOverlayCenter(officials)
+	flow.transition(officials, crossFade)
 	currentLayer = officials
 	detailReset()
 
 #FROM AWARENESS PREVIEW PAGE
 rallyBtn.onClick ->
-	flow.showOverlayCenter(rally)
+	flow.transition(rally, crossFade)
 	currentLayer = rally
 	detailReset()
 
 socialmediaBtn.onClick ->
-	flow.showOverlayCenter(socialmedia)
+	flow.transition(socialmedia, crossFade)
 	currentLayer = socialmedia
 	detailReset()
 
@@ -1161,11 +1183,11 @@ socialmediaBtn.onClick ->
 backBtn.onClick ->
 # 	print currentLayer
 	if currentLayer.classList.contains('advocate')
-		flow.showOverlayCenter(advocatePreview)
+		flow.transition(advocatePreview, crossFade)
 		currentLayer = advocatePreview
 		previewReset()
 	else if currentLayer.classList.contains('awareness')
-		flow.showOverlayCenter(awarenessPreview)
+		flow.transition(awarenessPreview, crossFade)
 		currentLayer = awarenessPreview
 		previewReset()
 

@@ -252,40 +252,38 @@ home_imgs = new Layer
 	width: Screen.width
 
 home_overlay1 = new Layer
-	height: (Screen.height / 2
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: 961
-	x: -0.5
+	width: Screen.width / 2
 	parent: home_imgs
 
 home_overlay2 = new Layer
-	height: 540
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: 961
+	width: Screen.width / 2
 	x: Align.right
 	parent: home_imgs
 
 home_overlay3 = new Layer
-	height: 540
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: 961
-	x: -0.5
-	y: 539
+	width: Screen.width / 2
+	y: Align.bottom
 	parent: home_imgs
 	
 home_overlay4 = new Layer
-	height: 540
+	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: 961
+	width: Screen.width / 2
 	x: Align.right
-	y: 539
+	y: Align.bottom
 	parent: home_imgs
 
 homeOArray = [home_overlay1, home_overlay2, home_overlay3, home_overlay4]
 
 home_text = new Layer
 	height: 700
-	image: "images/home_text.png"
+	image: "images/home_text2.png"
 	width: 1537
 	parent: home_imgs
 	x: Align.center
@@ -304,8 +302,8 @@ participatePreview = new Layer
 	width: Screen.width
 	height: Screen.height
 	image: "images/givePreview.png"
-	name: 'give'
-givePreview.classList.add('participate')
+	name: 'participate'
+participatePreview.classList.add('participate')
 #ADVOCATE PREVIEW PAGE
 	
 advocatePreview = new Layer
@@ -440,13 +438,15 @@ navGive = new Layer
 	image: "images/navGive.png"
 	parent: navBar
 	opacity: 0
+	x: 673
 
 navParticipate = new Layer
-	width: 337
 	height: 121
 	image: "images/navPart.png"
+	width: 337
 	parent: navBar
 	opacity: 0
+	x: 1000
 
 progress1 = new Layer
 	width: 37
@@ -858,7 +858,7 @@ animateQuizBtns = (_buttons) ->
 
 #skip to HOME
 quiz_skip.onClick ->
-	flow.showOverlayCenter(home_imgs)
+	flow.showOverlayBottom(home_imgs)
 	currentLayer = home_imgs
 
 #HOME animations
@@ -870,10 +870,34 @@ for o in homeOArray
 		this.animate
 			opacity: 1
 
-#Select ADVOCATE PREVIEW from HOME
+crossFade = (nav, layerA, layerB, overlay) ->
+	transition =
+		layerA:
+			show: {options: {time: 1}, opacity: 1}
+			hide: {options: {time: 1}, opacity: 0}
+		layerB:
+			show: {options: {time: 1}, opacity: 1}
+			hide: {options: {time: 1}, opacity: 0}
+
+#Select ACTIOINS from HOME
 home_overlay1.onClick ->
-	flow.showOverlayLeft(advocatePreview)
+	flow.transition(advocatePreview, crossFade)
 	currentLayer = advocatePreview
+	previewReset()
+
+home_overlay2.onClick ->
+	flow.transition(givePreview, crossFade)
+	currentLayer = givePreview
+	previewReset()
+
+home_overlay3.onClick ->
+	flow.transition(participatePreview, crossFade)
+	currentLayer = participatePreview
+	previewReset()
+
+home_overlay4.onClick ->
+	flow.transition(participatePreview, crossFade)
+	currentLayer = awarenessPreview
 	previewReset()
 
 #TOOLKIT HANDLER
@@ -945,13 +969,23 @@ stateCheck = (count) ->
 		nTools.x = 94
 		
 navAdvocate.onClick ->
-	flow.showOverlayCenter(advocatePreview)
+	flow.transition(advocatePreview, crossFade)
 	currentLayer = advocatePreview
 	previewReset()
 
 navAware.onClick ->
-	flow.showOverlayCenter(awarenessPreview)
+	flow.transition(awarenessPreview, crossFade)
 	currentLayer = awarenessPreview
+	previewReset()
+
+navGive.onClick ->
+	flow.transition(givePreview, crossFade)
+	currentLayer = givePreview
+	previewReset()
+
+navParticipate.onClick ->
+	flow.transition(participatePreview, crossFade)
+	currentLayer = participatePreview
 	previewReset()
 
 navHome.onClick ->
@@ -970,10 +1004,24 @@ bothReset = ->
 		p.y = 100 * (index + 1) + 250
 	if currentLayer.classList.contains('advocate')
 		navAware.opacity = 0
+		navParticipate.opacity = 0
+		navGive.opacity = 0
 		navAdvocate.opacity = 1
 	else if currentLayer.classList.contains('awareness')
 		navAdvocate.opacity = 0
+		navParticipate.opacity = 0
+		navGive.opacity = 0
 		navAware.opacity = 1
+	else if currentLayer.classList.contains('give')
+		navAdvocate.opacity = 0
+		navAware.opacity = 0
+		navParticipate.opacity = 0
+		navGive.opacity = 1
+	else if currentLayer.classList.contains('participate')
+		navAware.opacity = 0
+		navAdvocate.opacity = 0
+		navGive.opacity = 0
+		navParticipate.opacity = 1
 	progress = 2
 	progressCheck(progress)
 	

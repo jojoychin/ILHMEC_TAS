@@ -73,6 +73,7 @@ onboarding = new Layer
 	x: Align.center
 	y: Align.center
 	image: "images/onboarding.png"
+	scale: 0
 	
 quizContainer = new Layer
 	width: Screen.width
@@ -669,17 +670,36 @@ sendEmail = new Layer
 #ATTRACT LOOP
 currentLayer = overlay
 flow = new FlowComponent
-flow.showNext(home_imgs)
-# flow.showNext(attract1)
+# flow.showNext(home_imgs)
+flow.showNext(attract1)
 
 flow.layers = [ attract1, attract2, attract3, attract4 ]
-# flow.cycle( 6000 )
+flow.cycle( 6000 )
 
-cornerTransition = ->
+#custom flow transitions
+crossFade = (nav, layerA, layerB, overlay) ->
 	transition =
-		advocatePreview:
-			x: Align.center
-			y: Align.center
+		layerA:
+			show: {options: {time: 1}, opacity: 1}
+			hide: {options: {time: 1}, opacity: 0}
+		layerB:
+			show: {options: {time: 1}, opacity: 1}
+			hide: {options: {time: 1}, opacity: 0}
+		overlay:
+			show: {options: opacity: 0}
+			hide: {options: opacity: 0}
+
+crossFade2 = (nav, layerA, layerB, overlay) ->
+	transition =
+		layerA:
+			show: {options: {time: 0.2}, opacity: 1}
+			hide: {options: {time: 0.2}, opacity: 1}
+		layerB:
+			show: {options: {time: 0.2}, opacity: 1}
+			hide: {options: {time: 0.2}, opacity: 0}
+		overlay:
+			show: {options: opacity: 0}
+			hide: {options: opacity: 0}
 
 # function for ending Attract & transition to onboarding modal
 attractEnd = ->
@@ -688,8 +708,13 @@ attractEnd = ->
 	attract1_CTA.visible = false
 	attract3_CTA.visible = false
 	attract4_CTA.visible = false
-	flow.showOverlayCenter(overlay)
+	flow.transition(overlay, crossFade2)
 	overlay.addChild(onboarding)
+	Utils.delay 0.5, ->
+		onboarding.animate
+			scale: 1
+			options: 
+				curve: Spring(500, 15, 20)
 	attract1.ignoreEvents and attract2.ignoreEvents
 
 #TAP TO ENTER
@@ -772,7 +797,7 @@ attachProgress = ( _progress )->
 #ONBOARDING -> click to say GOT IT, brings up quiz
 removeOnboarding = ->
 	onboarding.visible = false
-	flow.showOverlayCenter(quizContainer)
+	flow.showOverlayTop(quizContainer)
 	attachProgress(progress, quizContainer)
 	
 onboarding.onClick(removeOnboarding)
@@ -858,7 +883,7 @@ animateQuizBtns = (_buttons) ->
 
 #skip to HOME
 quiz_skip.onClick ->
-	flow.showOverlayCenter(home_imgs)
+	flow.showOverlayBottom(home_imgs)
 	currentLayer = home_imgs
 
 #HOME animations
@@ -872,22 +897,22 @@ for o in homeOArray
 
 #Select ACTIOINS from HOME
 home_overlay1.onClick ->
-	flow.showOverlayLeft(advocatePreview)
+	flow.transition(advocatePreview, crossFade)
 	currentLayer = advocatePreview
 	previewReset()
 
 home_overlay2.onClick ->
-	flow.showOverlayLeft(givePreview)
+	flow.transition(givePreview, crossFade)
 	currentLayer = givePreview
 	previewReset()
 
 home_overlay3.onClick ->
-	flow.showOverlayLeft(participatePreview)
+	flow.transition(participatePreview, crossFade)
 	currentLayer = participatePreview
 	previewReset()
 
 home_overlay4.onClick ->
-	flow.showOverlayLeft(awarenessPreview)
+	flow.transition(participatePreview, crossFade)
 	currentLayer = awarenessPreview
 	previewReset()
 
@@ -960,27 +985,27 @@ stateCheck = (count) ->
 		nTools.x = 94
 		
 navAdvocate.onClick ->
-	flow.showOverlayCenter(advocatePreview)
+	flow.transition(advocatePreview, crossFade)
 	currentLayer = advocatePreview
 	previewReset()
 
 navAware.onClick ->
-	flow.showOverlayCenter(awarenessPreview)
+	flow.transition(awarenessPreview, crossFade)
 	currentLayer = awarenessPreview
 	previewReset()
 
 navGive.onClick ->
-	flow.showOverlayCenter(givePreview)
+	flow.transition(givePreview, crossFade)
 	currentLayer = givePreview
 	previewReset()
 
 navParticipate.onClick ->
-	flow.showOverlayCenter(awarenessPreview)
-	currentLayer = awarenessPreview
+	flow.transition(participatePreview, crossFade)
+	currentLayer = participatePreview
 	previewReset()
 
 navHome.onClick ->
-	flow.showOverlayCenter(home_imgs)
+	flow.showOverlayBottom(home_imgs)
 	currentLayer = home_imgs
 
 toolkitArray = []
@@ -1048,7 +1073,7 @@ exploreAwareness.onClick ->
 	previewReset()
 	
 exploreOther.onClick ->
-	flow.showOverlayCenter(home_imgs)
+	flow.showOverlayBottom(home_imgs)
 	currentLayer = home_imgs
 
 #toolkit click event
@@ -1147,23 +1172,23 @@ keyboard.onClick ->
 
 #FROM ADVOCATE PREVIEW PAGE
 petitionBtn.onClick ->
-	flow.showOverlayCenter(petition)
+	flow.transition(petition, crossFade)
 	currentLayer = petition
 	detailReset()
 
 officialsBtn.onClick ->
-	flow.showOverlayCenter(officials)
+	flow.transition(officials, crossFade)
 	currentLayer = officials
 	detailReset()
 
 #FROM AWARENESS PREVIEW PAGE
 rallyBtn.onClick ->
-	flow.showOverlayCenter(rally)
+	flow.transition(rally, crossFade)
 	currentLayer = rally
 	detailReset()
 
 socialmediaBtn.onClick ->
-	flow.showOverlayCenter(socialmedia)
+	flow.transition(socialmedia, crossFade)
 	currentLayer = socialmedia
 	detailReset()
 
@@ -1171,11 +1196,11 @@ socialmediaBtn.onClick ->
 backBtn.onClick ->
 # 	print currentLayer
 	if currentLayer.classList.contains('advocate')
-		flow.showOverlayCenter(advocatePreview)
+		flow.transition(advocatePreview, crossFade)
 		currentLayer = advocatePreview
 		previewReset()
 	else if currentLayer.classList.contains('awareness')
-		flow.showOverlayCenter(awarenessPreview)
+		flow.transition(awarenessPreview, crossFade)
 		currentLayer = awarenessPreview
 		previewReset()
 
