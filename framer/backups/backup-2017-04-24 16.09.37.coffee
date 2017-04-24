@@ -505,7 +505,7 @@ toolkit = new Layer
 	image: "images/toolkit_blank.png"
 	x: 1786
 	y: 100
-	parent: toolkit_overlay
+# 	parent: toolkit_overlay
 
 toolkit.states = 
 	blank:
@@ -569,9 +569,9 @@ toolkitBar = new Layer
 nTools = new TextLayer
 	text: 0
 	fontSize: 20
-	textAlign: 'center'
+	textAlign: 'left'
 	parent: toolkit
-	x: 88
+	x: 89
 	y: 233
 	color: 'white'
 	fontFamily: 'Gotham'
@@ -993,7 +993,7 @@ stateCheck = (count) ->
 		temp.addChild(checked)
 		toolkit.addChild(emailBtn)
 		nTools.text = count
-		nTools.x = 94
+		nTools.x = 92
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)
@@ -1055,6 +1055,7 @@ bothReset = ->
 previewReset = ->
 	bothReset()
 	currentLayer.addChild(toolkit)
+	toolkit.bringToFront()
 
 detailReset = ->
 	bothReset()
@@ -1068,6 +1069,7 @@ detailReset = ->
 		addBtn.stateSwitch('active')
 		addBtn.ignoreEvents = false
 	currentLayer.addChild(toolkit)
+	toolkit.bringToFront()
 
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
@@ -1234,14 +1236,22 @@ addBtn.onClick ->
 	stateCounter++
 	stateCheck(stateCounter)
 	if stateCounter >= 2
+		toolkitHandler(isOpen)
+		Utils.delay 0.75, ->
+			temp.addChild(checked)
+			checked.animate
+				opacity: 1
+				scale: 1
+				rotation: 360
+
 	#call shake functions on toolkit
-		animA.start()
-		animB.start()
-		animA.on Events.AnimationEnd, -> animB.start()
-		animB.on Events.AnimationEnd, -> animA.start()
-		# Option 1: Stop after n amount of seconds
-		Utils.delay 1, ->
-			animA.stop()
-			animB.stop()
+# 		animA.start()
+# 		animB.start()
+# 		animA.on Events.AnimationEnd, -> animB.start()
+# 		animB.on Events.AnimationEnd, -> animA.start()
+# 		# Option 1: Stop after n amount of seconds
+# 		Utils.delay 1, ->
+# 			animA.stop()
+# 			animB.stop()
 	addBtn.stateSwitch('inactive')
 	addBtn.ignoreEvents = true
