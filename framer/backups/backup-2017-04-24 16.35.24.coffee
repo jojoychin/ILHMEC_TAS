@@ -1,3 +1,6 @@
+# Use desktop cursor
+document.body.style.cursor = "none"
+
 require('FlowComponentCycle')
 {ƒ,ƒƒ} = require 'findModule'
 
@@ -505,7 +508,7 @@ toolkit = new Layer
 	image: "images/toolkit_blank.png"
 	x: 1786
 	y: 100
-	parent: toolkit_overlay
+# 	parent: toolkit_overlay
 
 toolkit.states = 
 	blank:
@@ -990,18 +993,17 @@ stateCheck = (count) ->
 				temp = tool
 		toolNum.addChild(temp)
 		checked = checked.copy()
-		temp.addChild(checked)
-		toolkit.addChild(emailBtn)
-		nTools.text = count
-		nTools.x = 92
-		toolkitHandler(isOpen)
 		Utils.delay 0.75, ->
+			checked.scale = 0
+			checked.rotation = 0
 			temp.addChild(checked)
 			checked.animate
 				opacity: 1
 				scale: 1
 				rotation: 360
-
+		toolkit.addChild(emailBtn)
+		nTools.text = count
+		nTools.x = 92
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)
@@ -1032,14 +1034,6 @@ toolkitArray = []
 #function for what to add when loading preview or detail pages
 bothReset = ->
 	stateCheck(stateCounter)
-	if toolk
-	toolkit_overlay.removeChild(toolkit_overlay)
-		toolkit_overlay.ignoreEvents = true
-		toolkit_overlay.animate
-			opacity: 0
-		toolkit.animate
-			x: 1786
-		isOpen = false
 	isOpen = false
 	currentLayer.addChild(navBar)
 	progressArray.forEach (p, index) ->
@@ -1070,8 +1064,8 @@ bothReset = ->
 	
 previewReset = ->
 	bothReset()
-	Utils.delay 0.1, ->
-		currentLayer.addChild(toolkit)
+	currentLayer.addChild(toolkit)
+	toolkit.bringToFront()
 
 detailReset = ->
 	bothReset()
@@ -1084,8 +1078,8 @@ detailReset = ->
 		currentLayer.addChild(addBtn)
 		addBtn.stateSwitch('active')
 		addBtn.ignoreEvents = false
-	Utils.delay 0.1, ->
-		currentLayer.addChild(toolkit)
+	currentLayer.addChild(toolkit)
+	toolkit.bringToFront()
 
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
@@ -1251,7 +1245,9 @@ addBtn.onClick ->
 	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
-# 	if stateCounter >= 2
+	if stateCounter >= 2
+		toolkitHandler(isOpen)
+
 	#call shake functions on toolkit
 # 		animA.start()
 # 		animB.start()

@@ -1,3 +1,6 @@
+# Use desktop cursor
+# document.body.style.cursor = "none"
+
 require('FlowComponentCycle')
 {ƒ,ƒƒ} = require 'findModule'
 
@@ -257,9 +260,9 @@ home_imgs = new Layer
 home_overlay1 = new Layer
 	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: Screen.width / 2
+	width: 1924 / 2
 	parent: home_imgs
-	x: 1
+	x: 0
 
 home_overlay2 = new Layer
 	height: Screen.height / 2
@@ -271,7 +274,7 @@ home_overlay2 = new Layer
 home_overlay3 = new Layer
 	height: Screen.height / 2
 	image: "images/home_overlayquarter.png"
-	width: Screen.width / 2
+	width: 1924 / 2
 	y: Align.bottom
 	parent: home_imgs
 	x: 1
@@ -898,13 +901,13 @@ quiz_skip.onClick ->
 	currentLayer = home_imgs
 
 #HOME animations
-for o in homeOArray
-	o.onMouseOver ->
-		this.animate
-			opacity: 0
-	o.onMouseOut ->
-		this.animate
-			opacity: 1
+# for o in homeOArray
+# 	o.onMouseOver ->
+# 		this.animate
+# 			opacity: 0
+# 	o.onMouseOut ->
+# 		this.animate
+# 			opacity: 1
 
 #Select ACTIOINS from HOME
 home_overlay1.onClick ->

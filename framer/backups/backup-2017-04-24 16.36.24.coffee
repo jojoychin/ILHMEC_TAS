@@ -1,3 +1,6 @@
+# Use desktop cursor
+document.body.style.cursor = "none"
+
 require('FlowComponentCycle')
 {ƒ,ƒƒ} = require 'findModule'
 
@@ -505,7 +508,7 @@ toolkit = new Layer
 	image: "images/toolkit_blank.png"
 	x: 1786
 	y: 100
-	parent: toolkit_overlay
+# 	parent: toolkit_overlay
 
 toolkit.states = 
 	blank:
@@ -898,13 +901,13 @@ quiz_skip.onClick ->
 	currentLayer = home_imgs
 
 #HOME animations
-for o in homeOArray
-	o.onMouseOver ->
-		this.animate
-			opacity: 0
-	o.onMouseOut ->
-		this.animate
-			opacity: 1
+# for o in homeOArray
+# 	o.onMouseOver ->
+# 		this.animate
+# 			opacity: 0
+# 	o.onMouseOut ->
+# 		this.animate
+# 			opacity: 1
 
 #Select ACTIOINS from HOME
 home_overlay1.onClick ->
@@ -990,18 +993,17 @@ stateCheck = (count) ->
 				temp = tool
 		toolNum.addChild(temp)
 		checked = checked.copy()
-		temp.addChild(checked)
-		toolkit.addChild(emailBtn)
-		nTools.text = count
-		nTools.x = 92
-		toolkitHandler(isOpen)
 		Utils.delay 0.75, ->
+			checked.scale = 0
+			checked.rotation = 0
 			temp.addChild(checked)
 			checked.animate
 				opacity: 1
 				scale: 1
 				rotation: 360
-
+		toolkit.addChild(emailBtn)
+		nTools.text = count
+		nTools.x = 92
 		
 navAdvocate.onClick ->
 	flow.transition(advocatePreview, crossFade)
@@ -1062,8 +1064,8 @@ bothReset = ->
 	
 previewReset = ->
 	bothReset()
-	Utils.delay 0.1, ->
-		currentLayer.addChild(toolkit)
+	currentLayer.addChild(toolkit)
+	toolkit.bringToFront()
 
 detailReset = ->
 	bothReset()
@@ -1076,8 +1078,8 @@ detailReset = ->
 		currentLayer.addChild(addBtn)
 		addBtn.stateSwitch('active')
 		addBtn.ignoreEvents = false
-	Utils.delay 0.1, ->
-		currentLayer.addChild(toolkit)
+	currentLayer.addChild(toolkit)
+	toolkit.bringToFront()
 
 #QUIZ RESULTS
 exploreAdvocate.onClick ->
@@ -1243,7 +1245,9 @@ addBtn.onClick ->
 	lastToolAdded = currentLayer.name + '_unchecked'
 	stateCounter++
 	stateCheck(stateCounter)
-# 	if stateCounter >= 2
+	if stateCounter >= 2
+		toolkitHandler(isOpen)
+
 	#call shake functions on toolkit
 # 		animA.start()
 # 		animB.start()
