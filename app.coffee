@@ -893,11 +893,21 @@ animateQuizBtns = (_buttons) ->
 		opacity: 0.12
 	_buttons.ignoreEvents = true
 
+#remove previous screens
+removeFlows = ->
+	quizContainer.visible = false
+	overlay.visible = false
+	attract1.visible = false
+	attract2.visible = false
+	attract3.visible = false
+	attract4.visible = false
+
 #skip to HOME
 quiz_skip.onClick ->
 	flow.showOverlayBottom(home_imgs)
 	currentLayer = home_imgs
-
+	removeFlows()
+	
 #HOME animations
 # for o in homeOArray
 # 	o.onMouseOver ->
@@ -1086,6 +1096,7 @@ exploreAdvocate.onClick ->
 		results.visible = false
 	currentLayer = advocatePreview
 	previewReset()
+	removeFlows()
 
 exploreAwareness.onClick ->
 	flow.showOverlayCenter(awarenessPreview)
@@ -1093,12 +1104,14 @@ exploreAwareness.onClick ->
 		results.visible = false
 	currentLayer = awarenessPreview
 	previewReset()
+	removeFlows()
 	
 exploreOther.onClick ->
 	flow.showOverlayBottom(home_imgs)
 	for results in quizResArray
 		results.visible = false
 	currentLayer = home_imgs
+	removeFlows()
 
 #toolkit click event
 toolkitBar.onClick ->
