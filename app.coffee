@@ -262,7 +262,6 @@ home_overlay1 = new Layer
 	image: "images/home_overlayquarter.png"
 	width: 1924 / 2
 	parent: home_imgs
-	x: 0
 
 home_overlay2 = new Layer
 	height: Screen.height / 2
@@ -277,7 +276,6 @@ home_overlay3 = new Layer
 	width: 1924 / 2
 	y: Align.bottom
 	parent: home_imgs
-	x: 1
 	
 home_overlay4 = new Layer
 	height: Screen.height / 2
@@ -309,7 +307,7 @@ givePreview.classList.add('give')
 participatePreview = new Layer
 	width: Screen.width
 	height: Screen.height
-	image: "images/givePreview.png"
+	image: "images/participatePreview.png"
 	name: 'participate'
 participatePreview.classList.add('participate')
 #ADVOCATE PREVIEW PAGE
