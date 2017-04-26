@@ -1,8 +1,7 @@
-# Use desktop cursor
-# document.body.style.cursor = "none"
-
+# Get rid of cursor for user testing
+document.body.style.cursor = "none"
+# Module requirements
 require('FlowComponentCycle')
-{ƒ,ƒƒ} = require 'findModule'
 
 # Define and set custom device
 Framer.Device.customize
@@ -289,7 +288,7 @@ homeOArray = [home_overlay1, home_overlay2, home_overlay3, home_overlay4]
 
 home_text = new Layer
 	height: 700
-	image: "images/home_text2.png"
+	image: "images/home_text.png"
 	width: 1537
 	parent: home_imgs
 	x: Align.center
@@ -564,7 +563,7 @@ toolkitBar = new Layer
 	parent: toolkit
 	x: 59
 	y: 58
-	width: 175
+	width: 78
 	height: 668
 
 nTools = new TextLayer
@@ -940,6 +939,8 @@ home_overlay4.onClick ->
 
 #TOOLKIT HANDLER
 isOpen = false
+cursorBool = false
+fakeEmailAdded = false
 toolkitHandler = (_isOpen) ->
 	if !_isOpen
 		currentLayer.addChild(toolkit_overlay)
@@ -949,7 +950,15 @@ toolkitHandler = (_isOpen) ->
 			opacity: 1
 		toolkit.animate
 			x: 916
+		if stateCounter >= 1
+# 			emailContainer.addChild(email_prompt)
+			if !fakeEmailAdded
+				email_prompt.opacity = 1
+				if cursorBool
+					emailContainer.removeChild(cursor)
+					cursorBool = false
 		isOpen = true
+		
 	else if _isOpen
 		toolkit_overlay.removeChild(toolkit_overlay)
 		toolkit_overlay.ignoreEvents = true
@@ -1116,6 +1125,7 @@ exploreOther.onClick ->
 #toolkit click event
 toolkitBar.onClick ->
 	toolkitHandler(isOpen)
+	keyboard.visible = false
 
 browsingBtn.onClick ->
 	toolkitHandler(isOpen)
@@ -1123,6 +1133,13 @@ browsingBtn.onClick ->
 toolkit_overlay.onClick ->
 	toolkitHandler(isOpen)
 	keyboard.visible = false
+
+toolkit.onClick ->
+# 	if cursorBool
+# 		emailContainer.removeChild(cursor)
+# 		email_prompt.opacity = 1
+
+emailContainer.onClick ->
 
 emailBtn.onClick ->
 	emailBtn.visible = false
@@ -1142,6 +1159,8 @@ email_prompt.onClick ->
 	progressCheck(progress)
 	email_prompt.opacity = 0
 	emailContainer.addChild(cursor)
+	cursorBool = true
+# 	cursor.opacity = 0
 	toolkit.addChild(keyboard)
 	keyboard.visible = true
 	keyboard.animate
@@ -1181,18 +1200,19 @@ sendEmail.onClick ->
 		toolkit_success.animate
 			opacity: 1
 			time: 0.5
-		nTools.text = 0
-		nTools.x = 88
-	Utils.delay 6, ->
-		if isOpen
-			toolkitHandler(isOpen)
-		Utils.delay 2, ->
-			window.location.reload()
+# 		nTools.text = 0
+# 		nTools.x = 88
+# 	Utils.delay 6, ->
+# 		if isOpen
+# 			toolkitHandler(isOpen)
+# 		Utils.delay 2, ->
+# 			window.location.reload()
 
 sendEmail.ignoreEvents = true
 
 keyboard.onClick ->
 	emailContainer.addChild(fakeEmail)
+	fakeEmailAdded = true
 	type(fakeEmail,'youremail@gmail.com')
 	Utils.interval 0.2, ->
 		cursorBlink(cursor.opacity)
@@ -1206,6 +1226,7 @@ keyboard.onClick ->
 		sendEmail.animate
 			opacity: 1
 		sendEmail.ignoreEvents = false
+	keyboard.ignoreEvents = true
 
 #FROM ADVOCATE PREVIEW PAGE
 petitionBtn.onClick ->
